@@ -1,18 +1,19 @@
-"""Music + SFX + voice mix for WHAT IF #01. Everything is synthesized here.
+"""WHAT IF? series audio: theme music + SFX bank + voice mix. Everything is synthesized here.
 
-usage: python audio_mix.py <build_dir>
-reads  voice.wav, timeline.json, sfx.json, shots.json   writes mix.wav (48 kHz stereo)
+usage: python audio_mix.py <episode_dir>
+reads  build/{voice.wav,timeline.json,sfx.json,music.json}   writes build/mix.wav (48 kHz stereo)
 """
 import json, sys
 import numpy as np
 import soundfile as sf
 from scipy.signal import butter, sosfilt, resample_poly
 
-B = sys.argv[1]
+import os
+B = os.path.join(sys.argv[1], "build")
 SR = 48000
 TL = json.load(open(f"{B}/timeline.json"))
 CUES = json.load(open(f"{B}/sfx.json"))
-T = json.load(open(f"{B}/shots.json"))
+MUS = json.load(open(f"{B}/music.json"))
 DUR = TL["duration"] + 0.05
 N = int(DUR * SR)
 R = np.random.default_rng(7)
@@ -151,9 +152,62 @@ BANK = {"pop": s_pop, "whoosh": lambda: s_whoosh(), "whoosh_scan": lambda: s_who
 GAIN = {"crumble": 0.8, "gurgle": 0.9, "hit": 0.75, "hit_big": 0.95, "burst": 0.9, "alarm": 0.6, "water": 0.7,
         "whoosh_down": 0.8, "whoosh_up": 0.8, "fly": 0.8, "pop": 0.7}
 
+
+# ---- EP02 additions
+def s_engine(d=3.4, rough=0.0):
+    x = tt(d); f = 38 + 4 * np.sin(2 * np.pi * 0.7 * x)
+    saw = 2 * ((np.cumsum(f) / SR) % 1) - 1
+    rumble = lp(saw, 260) * (0.7 + 0.3 * np.sin(2 * np.pi * 9 * x)) * 0.55
+    if rough: rumble += lp(noise(d), 600) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 5 * x))) * rough * 0.35
+    return rumble * np.minimum(1, x / 0.2) * np.minimum(1, (d - x) / 0.5)
+def s_cough():
+    out = np.zeros(int(0.9 * SR))
+    for k, at in enumerate([0.0, 0.32]):
+        d = 0.22; b = bp(noise(d), 300, 2200) * env(int(d * SR), 0.004, 0.06) * 0.9
+        b += np.sin(2 * np.pi * (170 - 60 * tt(d)) * tt(d)) * env(int(d * SR), 0.004, 0.05) * 0.4
+        out[int(at * SR):int(at * SR) + len(b)] += b * (1 - 0.3 * k)
+    return out
+def s_counter():
+    out = np.zeros(int(1.2 * SR)); tt0 = 0.0; gap = 0.09
+    while tt0 < 1.1:
+        c = np.sin(2 * np.pi * 2200 * tt(0.02)) * env(int(0.02 * SR), 0.0005, 0.006) * 0.35
+        out[int(tt0 * SR):int(tt0 * SR) + len(c)] += c; tt0 += gap; gap = max(0.025, gap * 0.88)
+    return out
+def s_clink(f=2637):
+    x = tt(0.8); return sum(np.sin(2 * np.pi * f * k * x) * w for k, w in [(1, 1), (2.76, 0.5), (5.4, 0.25)]) * np.exp(-x * 7) * 0.22
+def s_traffic():
+    d = 3.0; x = tt(d); out = s_engine(d) * 0.8 + lp(noise(d), 900) * 0.12
+    for at, f in [(0.6, 440), (1.9, 392)]:
+        hd = 0.32; h = (np.sign(np.sin(2 * np.pi * f * tt(hd))) + np.sign(np.sin(2 * np.pi * f * 1.26 * tt(hd)))) * env(int(hd * SR), 0.01, 0.3) * 0.08
+        out[int(at * SR):int(at * SR) + len(h)] += lp(h, 3000)
+    return out
+def s_siren():
+    d = 2.2; x = tt(d); f = 520 + 280 * (0.5 - 0.5 * np.cos(2 * np.pi * x / 1.1))
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / 0.3) * np.minimum(1, (d - x) / 0.6) * 0.2
+def s_paper():
+    out = s_whoosh(0.6, 400, 6000) * 0.8
+    slap = hp(noise(0.12), 800) * env(int(0.12 * SR), 0.001, 0.03) * 0.8
+    out = np.concatenate([out, np.zeros(int(0.2 * SR))]); out[int(0.55 * SR):int(0.55 * SR) + len(slap)] += slap
+    return out
+def s_rain():
+    d = 3.2; x = tt(d); n = bp(noise(d), 1500, 9000) * 0.18
+    for i in range(160):
+        at = int(R.uniform(0, d - 0.05) * SR); c = hp(noise(0.01), 3000) * env(int(0.01 * SR), 0.0003, 0.002) * R.uniform(0.05, 0.25)
+        n[at:at + len(c)] += c
+    return n * np.minimum(1, x / 0.3) * np.minimum(1, (d - x) / 0.6)
+def s_thunder():
+    d = 2.0; x = tt(d); return lp(noise(d), 180, 4) * 3.0 * env(len(x), 0.02, 0.6)
+def s_sizzle():
+    d = 1.0; x = tt(d); return hp(noise(d), 4000) * (0.5 + 0.5 * np.abs(np.sin(2 * np.pi * 13 * x))) * env(len(x), 0.05, 0.45) * 0.35
+
+BANK.update({"engine": s_engine, "engine_dirty": lambda: s_engine(2.0, 1.0), "cough": s_cough, "counter": s_counter,
+             "clink": s_clink, "traffic": s_traffic, "siren": s_siren, "paper": s_paper, "rain": s_rain,
+             "thunder": s_thunder, "sizzle": s_sizzle})
+GAIN.update({"engine": 0.6, "engine_dirty": 0.8, "traffic": 0.6, "rain": 0.7, "thunder": 0.9})
+
 sfx = np.zeros(N)
 for c in CUES:
-    s = BANK[c["n"]]() * GAIN.get(c["n"], 0.85)
+    s = BANK[c["n"]]() * GAIN.get(c["n"], 0.85) * c.get("g", 1)
     i = int(c["t"] * SR); e = min(N, i + len(s))
     if i < N: sfx[i:e] += s[:e - i]
 
@@ -213,9 +267,11 @@ def window(a, b, fade=0.05):
 # old-radio filter during the 1775 flashback, intro fade-in
 gain = np.ones(N)
 gain *= np.clip(t_axis / 0.4, 0, 1)
-gain *= 1 - window(T["del"] - 0.02, T["del"] + 1.1, 0.03) * 0.85
-gain *= 1 - window(T["flam"] - 0.75, T["flam"] + 0.75, 0.04)
-hist = window(T["y1775"], T["restore"], 0.15)
+for a, b, depth in MUS["drops"]:
+    gain *= 1 - window(a, b, 0.04) * depth
+hist = np.zeros(N)
+for a, b in MUS["radio"]:
+    hist = np.maximum(hist, window(a, b, 0.15))
 radio = np.stack([bp(music[0], 500, 2500, 2), bp(music[1], 500, 2500, 2)]) * 1.6
 music = music * (1 - hist) + radio * hist
 # duck under the voice (smoothed envelope sidechain)

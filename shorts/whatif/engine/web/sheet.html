@@ -26,8 +26,8 @@ async function draw(){
                ['disgust','nose',0,0],['smug','thumb',0,0],['worried','idle',0,1],['happy','point',0.6,0]];
   items.forEach(([e,p,m,morph],i)=>{
     const x=1000+(i%4)*370, y=i<4?740:1340;
-    drawQuix(ctx,{x,y,s:0.95,t:i*0.7,expr:e,pose:p,mouth:m,morph,glow:morph?0.8:0.1,sweat:e==='worried'?1:0});
-    ctx.font='38px Lilita'; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText((p==='point'?'POINT':e.toUpperCase())+(morph?'  "!"':''),x,y+60); ctx.textAlign='left';
+    drawQuix(ctx,{x,y,s:0.95,t:i*0.7,expr:e,pose:p,mouth:m,morph,glow:morph?0.8:0.1,sweat:e==='worried'?1:0,hat:e==='smug'?'fedora':undefined,tears:e==='disgust'?1:0});
+    ctx.font='38px Lilita'; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText((p==='point'?'POINT':e==='smug'?'SMUG + FEDORA':e==='disgust'?'SMOG MODE':e.toUpperCase())+(morph?'  "!"':''),x,y+60); ctx.textAlign='left';
   });
   document.title='done';
 }

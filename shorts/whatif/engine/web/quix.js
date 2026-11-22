@@ -322,6 +322,33 @@ function sweatDrop(ctx, x, y, s) {
   ctx.restore();
 }
 
+
+function drawFedora(ctx) {
+  ctx.save(); ctx.lineJoin = 'round';
+  ctx.fillStyle = '#3B3552'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  ctx.beginPath(); ctx.ellipse(0, -372, 196, 30, 0, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(-118, -380); ctx.bezierCurveTo(-120, -440, -104, -476, -60, -478);
+  ctx.quadraticCurveTo(0, -458, 60, -478); ctx.bezierCurveTo(104, -476, 120, -440, 118, -380);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = Q.scarf; ctx.beginPath(); ctx.moveTo(-119, -410); ctx.lineTo(119, -410); ctx.lineTo(118, -382); ctx.lineTo(-118, -382); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.15)'; ctx.beginPath(); ctx.ellipse(-60, -440, 22, 30, 0.2, 0, 7); ctx.fill();
+  ctx.restore();
+}
+
+function drawTears(ctx, t, a) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.lineCap = 'round';
+  for (const sd of [-1, 1]) {
+    const x0 = 58 * sd + 22 * sd, y0 = -262;
+    ctx.strokeStyle = Q.ink; ctx.lineWidth = 18;
+    const path = () => { ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(x0 + 14 * sd, y0 + 40, x0 + 6 * sd, y0 + 80); };
+    path(); ctx.stroke(); ctx.strokeStyle = '#8FE3FF'; ctx.lineWidth = 10; path(); ctx.stroke();
+    const ph = (t * 1.6 + (sd > 0 ? 0.5 : 0)) % 1;
+    sweatDrop(ctx, x0 + 8 * sd, y0 + 90 + ph * 90, 0.7 * (1 - ph * 0.3));
+  }
+  ctx.restore();
+}
+
 // Arm poses: [handX, handY, bend, shape, handAngle|null] relative to local space
 const POSE = {
   idle:   { L: [-190, -95, -30, 'fist', null], R: [190, -95, 30, 'fist', null] },
@@ -336,6 +363,8 @@ const POSE = {
   think:  { L: [-190, -95, -30, 'fist', null], R: [60, -200, 70, 'fist', -2.2] },
   cheer:  { L: [-230, -360, 40, 'fist', -1.9], R: [230, -360, -40, 'fist', -1.2] },
   tap:    { L: [-190, -95, -30, 'fist', null], R: [250, -170, 30, 'open', 0.3] },
+  umbrella: { L: [-190, -95, -30, 'fist', null], R: [120, -330, 40, 'fist', -1.6] },
+  cough:  { L: [-190, -100, -30, 'fist', null], R: [40, -230, 70, 'fist', Math.PI * 0.9] },
 };
 
 function mixPose(a, b, t) {
@@ -403,10 +432,12 @@ function drawQuix(ctx, o) {
   ctx.restore();
   ctx.strokeStyle = Q.ink; ctx.lineWidth = 10; ctx.lineJoin = 'round'; ctx.stroke(BODY);
   if (o.wig) drawWig(ctx, false);
+  if (o.hat === 'fedora') drawFedora(ctx);
   drawScarf(ctx, t);
   drawEye(ctx, -58, -305, -1, o, E);
   drawEye(ctx, 58, -305, 1, o, E);
   drawMouth(ctx, o, E);
+  if (o.tears) drawTears(ctx, t, o.tears);
   if (o.sweat) sweatDrop(ctx, 150, -330, o.sweat);
   // arms
   for (const sd of ['L', 'R']) {

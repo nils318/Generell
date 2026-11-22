@@ -1,41 +1,24 @@
-"""Voice-over for WHAT IF #01 (toilet U-bend) with exact word timings.
+"""WHAT IF? voice-over with exact word timings (any episode).
 
 Kokoro-82M (ONNX). The stock export only returns audio, so we use a patched
 copy of the graph that also exposes the per-phoneme duration tensor
 (`/encoder/Gather_output_0`, 1 frame = 600 samples @ 24 kHz). That gives us
 frame-exact word timings for subtitles and lip sync without any aligner.
 
-usage: python voice.py <model_dir> <out_dir>
+usage: python voice.py <model_dir> <episode_dir>   (reads <episode>/script.json, writes <episode>/build/)
 """
 import json, re, sys
 import numpy as np
 import soundfile as sf
 from kokoro_onnx import Kokoro
 
-MODEL_DIR, OUT = sys.argv[1], sys.argv[2]
-VOICE, SPEED, SR, FPS = "af_heart", 1.04, 24000, 30
-
+import os
+MODEL_DIR, EP = sys.argv[1], sys.argv[2]
+OUT = os.path.join(EP, "build"); os.makedirs(OUT, exist_ok=True)
+SCRIPT = json.load(open(os.path.join(EP, "script.json")))
+VOICE, SPEED, SR, FPS = SCRIPT.get("voice", "am_michael"), SCRIPT.get("speed", 1.0), 24000, 30
 # (cue, text, pause_after_s). Display overrides: [shown|spoken]
-LINES = [
-    ("hook",     "Ever wondered why there's always water sitting in your toilet?", 0.35),
-    ("reveal",   "It's held there by this hidden bend.", 0.45),
-    ("intro",    "I'm Quix.", 0.15),
-    ("delete",   "And today... I'm deleting it.", 0.9),
-    ("mistake",  "Okay. That was a mistake.", 0.35),
-    ("seal",     "That little puddle was a seal.", 0.2),
-    ("sewer",    "And right under it? The sewer.", 0.35),
-    ("chain",    "No bend, no water. No water, no seal.", 0.2),
-    ("gas",      "So the sewer gas comes straight up. Into your bathroom.", 0.35),
-    ("h2s",      "That rotten egg smell is hydrogen sulfide.", 0.15),
-    ("toxic",    "And in high doses, it's toxic.", 0.35),
-    ("methane",  "There's methane too. Which is...", 0.55),
-    ("flammable", "flammable.", 0.6),
-    ("history",  "The fix? In [1775|seventeen seventy-five], a watchmaker named Alexander Cumming patented a toilet with an S-shaped bend.", 0.35),
-    ("restore",  "One tiny curve. And homes stopped smelling like the sewer.", 0.45),
-    ("tip",      "Pro tip: if a bathroom you rarely use starts to stink, just run the water.", 0.15),
-    ("dried",    "The seal probably dried out.", 0.5),
-    ("outro",    "So... what should I delete next?", 1.6),
-]
+LINES = [tuple(l) for l in SCRIPT["lines"]]
 LEAD_IN = 0.25
 
 k = Kokoro(f"{MODEL_DIR}/kokoro-timed.onnx", f"{MODEL_DIR}/voices-v1.0.bin")

@@ -1,0 +1,24 @@
+{
+ "voice": "am_michael",
+ "speed": 1.08,
+ "lines": [
+  ["hook", "Ever wondered why there's always water sitting in your toilet?", 0.35],
+  ["reveal", "It's held there by this hidden bend.", 0.45],
+  ["intro", "I'm Quix.", 0.15],
+  ["delete", "And today... I'm deleting it.", 0.9],
+  ["mistake", "Okay. That was a mistake.", 0.35],
+  ["seal", "That little puddle was a seal.", 0.2],
+  ["sewer", "And right under it? The sewer.", 0.35],
+  ["chain", "No bend, no water. No water, no seal.", 0.2],
+  ["gas", "So the sewer gas comes straight up. Into your bathroom.", 0.35],
+  ["h2s", "That rotten egg smell is hydrogen sulfide.", 0.15],
+  ["toxic", "And in high doses, it's toxic.", 0.35],
+  ["methane", "There's methane too. Which is...", 0.55],
+  ["flammable", "flammable.", 0.6],
+  ["history", "The fix? In [1775|seventeen seventy-five], a watchmaker named Alexander Cumming patented a toilet with an S-shaped bend.", 0.35],
+  ["restore", "One tiny curve. And homes stopped smelling like the sewer.", 0.45],
+  ["tip", "Pro tip: if a bathroom you rarely use starts to stink, just run the water.", 0.15],
+  ["dried", "The seal probably dried out.", 0.5],
+  ["outro", "So... what should I delete next?", 1.6]
+ ]
+}
