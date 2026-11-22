@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Lilita;src:url(fonts/LilitaOne.ttf)}
+@font-face{font-family:Bungee;src:url(fonts/Bungee.ttf)}
+html,body{margin:0;background:#111}</style></head><body>
+<canvas id="c" width="2400" height="1500"></canvas>
+<script src="quix.js"></script>
+<script>
+async function draw(){
+  await document.fonts.load('80px Bungee'); await document.fonts.load('40px Lilita');
+  const c=document.getElementById('c'), ctx=c.getContext('2d');
+  const g=ctx.createLinearGradient(0,0,0,1500); g.addColorStop(0,'#2A1460'); g.addColorStop(1,'#120830');
+  ctx.fillStyle=g; ctx.fillRect(0,0,2400,1500);
+  ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=2;
+  for(let x=0;x<2400;x+=60){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,1500);ctx.stroke();}
+  for(let y=0;y<1500;y+=60){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(2400,y);ctx.stroke();}
+  ctx.font='110px Bungee'; ctx.fillStyle='#FFD43B'; ctx.fillText('QUIX',70,150);
+  ctx.font='44px Lilita'; ctx.fillStyle='#fff'; ctx.fillText('Host of  WHAT IF?  — deletes one tiny thing per episode',75,215);
+  ctx.font='34px Lilita'; ctx.fillStyle='#B9A8FF';
+  ctx.fillText('Signature: glowing "?" antenna —',75,265);
+  ctx.fillText('Quix is the dot of the question mark.',75,308);
+  ctx.fillText('Realisation: it snaps into a "!"',75,351);
+  const {drawQuix}=QUIX;
+  drawQuix(ctx,{x:420,y:1420,s:1.62,t:0.4,expr:'cool',pose:'hips',glow:0.3});
+  const items=[['cool','idle',0,0],['happy','wave',0.25,0],['curious','think',0,0],['shock','shrug',0.1,1],
+               ['disgust','nose',0,0],['smug','thumb',0,0],['worried','idle',0,1],['happy','point',0.6,0]];
+  items.forEach(([e,p,m,morph],i)=>{
+    const x=1000+(i%4)*370, y=i<4?740:1340;
+    drawQuix(ctx,{x,y,s:0.95,t:i*0.7,expr:e,pose:p,mouth:m,morph,glow:morph?0.8:0.1,sweat:e==='worried'?1:0});
+    ctx.font='38px Lilita'; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText((p==='point'?'POINT':e.toUpperCase())+(morph?'  "!"':''),x,y+60); ctx.textAlign='left';
+  });
+  document.title='done';
+}
+draw();
+</script></body></html>
