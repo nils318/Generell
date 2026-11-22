@@ -2,6 +2,7 @@
  "voice": "am_fenrir",
  "speed": 1.07,
  "expr": 1.3,
+ "music": false,
  "lines": [
   ["hook", "Every car has this little metal box hidden underneath.", 0.35, {"pitch": 0.5}],
   ["reveal", "It's called a catalytic converter.", 0.45],

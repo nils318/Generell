@@ -5,7 +5,8 @@
 | #1 | What if toilets had no U-bend? | `ep01_toilet/WhatIf_01_Toilet_UBend.mp4` (47 s) |
 | #2 | What if car exhaust wasn't filtered? (Katalysator gelöscht) | `ep02_exhaust/WhatIf_02_Car_Exhaust.mp4` (53 s) |
 
-Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS.
+Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
+(nur Stimme + Soundeffekte; wieder einschalten mit `"music": true` in `script.json`).
 
 **Stimme:** Kokoro `am_fenrir` (männlich) mit Ausdrucks-Regler. Die vom Modell vorhergesagte Satzmelodie wird
 vor der Klangerzeugung verstärkt, Betonungen nach oben stärker als die Tiefen. So schwankt die Tonhöhe um

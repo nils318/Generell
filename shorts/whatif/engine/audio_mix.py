@@ -14,6 +14,7 @@ SR = 48000
 TL = json.load(open(f"{B}/timeline.json"))
 CUES = json.load(open(f"{B}/sfx.json"))
 MUS = json.load(open(f"{B}/music.json"))
+MUSIC_ON = json.load(open(os.path.join(sys.argv[1], "script.json"))).get("music", True)  # script.json "music": false -> voice + SFX only
 DUR = TL["duration"] + 0.05
 N = int(DUR * SR)
 R = np.random.default_rng(7)
@@ -281,7 +282,7 @@ voice = np.pad(voice, (0, N - len(voice)))
 venv = lp(np.abs(voice), 6)
 venv = venv / (venv.max() + 1e-9)
 duck = 1 - 0.55 * np.clip(venv * 4, 0, 1)
-music *= gain * duck * 0.42
+music *= gain * duck * (0.42 if MUSIC_ON else 0.0)
 
 # voice polish: gentle presence lift + light compression
 v = voice + hp(voice, 2500) * 0.25

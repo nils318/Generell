@@ -2,6 +2,7 @@
  "voice": "am_fenrir",
  "speed": 1.05,
  "expr": 1.3,
+ "music": false,
  "lines": [
   ["hook", "Ever wondered why there's always water sitting in your toilet?", 0.35, {"pitch": 0.5}],
   ["reveal", "It's held there by this hidden bend.", 0.45, {"speed": 0.97}],

@@ -6,6 +6,7 @@
 set -e
 ENG="$(cd "$(dirname "$0")" && pwd)"; EP="$1"; OUT="$2"
 if [ -n "$3" ]; then python3 "$ENG/voice.py" "$3" "$EP"; fi      # build/voice.wav + timeline.json
+rm -rf "$EP/build/frames"
 node "$ENG/render.js" "$EP" --workers 4                           # build/frames + sfx/shots/music.json
 python3 "$ENG/audio_mix.py" "$EP"                                 # build/mix.wav
 ffmpeg -y -v error -framerate 30 -i "$EP/build/frames/%05d.png" -i "$EP/build/mix.wav" \
