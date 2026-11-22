@@ -95,7 +95,7 @@ window.EPISODE = {
         draw: t => {
           const z = seg(t, WF('delete', 'every') - 0.1, WF('delete', 'earth') + 0.4);
           drawGlobe(ctx, t, ease.io(z), lerp(1.4e9, 0, ease.in(z)));
-          stamp('DELETED', 540, 1480, t, WF('delete', 'earth') + 0.2, T.mistake + 0.3, '#FF3B5C', 110, -0.08);
+          stamp('DELETED', 540, 900, t, WF('delete', 'earth') + 0.2, T.mistake + 0.3, '#FF3B5C', 110, -0.12);
         } },
       { a: T.mistake, b: T.job, name: 'mistake',
         cam: t => ({ z: lerp(1.18, 1.08, ease.out(seg(t, T.mistake, T.job))), x: 480, y: 1100, shake: 6 * (1 - seg(t, T.mistake, T.mistake + 0.6)) }),
@@ -148,9 +148,9 @@ window.EPISODE = {
           const sl = WF('smog', 'sunlight'), sm = WF('smog', 'smog');
           drawStreet(ctx, { smog: lerp(0.5, 0.95, ease.io(seg(t, sm - 0.2, T.smogB))), sunRays: fadeIO(t, sl - 0.1, T.smogB + 1, 0.2), car: idle(t), exhaust: 1, roadSpeed: 0 }, t);
           const parts = [['NOx', '#FF9A3D', T.smog + 0.05], ['+', null, T.smog + 0.15], ['HC', '#8C8C99', T.smog + 0.2], ['+', null, sl - 0.15], ['☀', '#FFD43B', sl - 0.1], ['=', null, sm - 0.2], ['SMOG', '#7A5A3A', sm - 0.1]];
-          let x = 105;
+          let x = 90;
           parts.forEach(([s, col, t0]) => {
-            const a = pop(t, t0, 0.35), w = s.length > 2 ? 230 : s === '+' || s === '=' ? 60 : 130;
+            const a = pop(t, t0, 0.35), w = s.length > 3 ? 210 : s.length === 3 ? 165 : s === '+' || s === '=' ? 60 : 130;
             if (a > 0) {
               if (col) { ctx.save(); ctx.translate(x + w / 2, 620); ctx.scale(a, a); pill(ctx, 0, 0, w, 110, col, INK, 8); txt(ctx, s, 0, 6, { size: s === '☀' ? 70 : 58, font: s === '☀' ? 'Lilita' : 'Bungee', color: s === 'SMOG' ? '#FFE9C8' : INK, shadow: false }); ctx.restore(); }
               else txt(ctx, s, x + w / 2, 620, { size: 80, font: 'Bungee', color: '#fff', stroke: 12, alpha: a });
