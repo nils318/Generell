@@ -1,21 +1,22 @@
 {
- "voice": "am_michael",
- "speed": 1.08,
+ "voice": "am_fenrir",
+ "speed": 1.07,
+ "expr": 1.3,
  "lines": [
-  ["hook", "Every car has this little metal box hidden underneath.", 0.35],
+  ["hook", "Every car has this little metal box hidden underneath.", 0.35, {"pitch": 0.5}],
   ["reveal", "It's called a catalytic converter.", 0.45],
-  ["intro", "I'm Quix.", 0.15],
-  ["delete", "And today... I'm deleting it. From every car on Earth.", 0.8],
-  ["mistake", "Okay. That's... not great.", 0.35],
+  ["intro", "I'm Quix.", 0.15, {"pitch": 1}],
+  ["delete", "And today... I'm deleting it. From every car on Earth!", 0.8, {"pitch": 1.5, "k": 1.5}],
+  ["mistake", "Okay... that's not great.", 0.35, {"pitch": -1, "speed": 0.95}],
   ["job", "That box cleans the nastiest stuff out of the exhaust.", 0.2],
-  ["gases", "Carbon monoxide. Nitrogen oxides. Unburned fuel.", 0.3],
+  ["gases", "Carbon monoxide! Nitrogen oxides! Unburned fuel!", 0.3, {"speed": 1.02, "k": 1.5}],
   ["metals", "Inside is a honeycomb coated in platinum, palladium and rhodium.", 0.4],
-  ["world", "Without it, over a billion cars blast all of that straight into the air.", 0.3],
+  ["world", "Without it, over a billion cars blast all of that straight into the air!", 0.3, {"pitch": 0.5}],
   ["smog", "Add sunlight, and you get smog. A brown haze that stings your eyes and hurts your lungs.", 0.35],
-  ["la", "This really happened. In [1943|nineteen forty-three], Los Angeles got so smoggy, people thought it was a gas attack.", 0.35],
-  ["acid", "And those nitrogen oxides help make acid rain.", 0.35],
-  ["fix", "That's why, starting in [1975|nineteen seventy-five], most new cars in the US got one.", 0.35],
+  ["la", "This really happened! In [1943|nineteen forty-three], Los Angeles got so smoggy, people thought it was a gas attack!", 0.35, {"k": 1.5}],
+  ["acid", "And those nitrogen oxides help make acid rain.", 0.35, {"pitch": -0.5}],
+  ["fix", "That's why, starting in [1975|nineteen seventy-five], most new cars in the US got one.", 0.35, {"pitch": 0.5}],
   ["co2", "It doesn't stop [CO2|C O two], though. That's a different episode.", 0.5],
-  ["outro", "So... what should I delete next?", 1.6]
+  ["outro", "So... what should I delete next?", 1.6, {"pitch": 1, "k": 1.5}]
  ]
 }

@@ -2,10 +2,18 @@
 
 | Folge | Thema | Video |
 |---|---|---|
-| #1 | What if toilets had no U-bend? | `ep01_toilet/WhatIf_01_Toilet_UBend.mp4` (52 s) |
-| #2 | What if car exhaust wasn't filtered? (Katalysator gelöscht) | `ep02_exhaust/WhatIf_02_Car_Exhaust.mp4` (58 s) |
+| #1 | What if toilets had no U-bend? | `ep01_toilet/WhatIf_01_Toilet_UBend.mp4` (47 s) |
+| #2 | What if car exhaust wasn't filtered? (Katalysator gelöscht) | `ep02_exhaust/WhatIf_02_Car_Exhaust.mp4` (53 s) |
 
-Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, männliche Stimme (Kokoro `am_michael`), −14 LUFS.
+Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS.
+
+**Stimme:** Kokoro `am_fenrir` (männlich) mit Ausdrucks-Regler. Die vom Modell vorhergesagte Satzmelodie wird
+vor der Klangerzeugung verstärkt, Betonungen nach oben stärker als die Tiefen. So schwankt die Tonhöhe um
+ca. 5,8 statt 3,4 Halbtöne (vorher `am_michael`, eher monoton). Pro Satz lassen sich Tempo (`speed`),
+Tonlage (`pitch`, Halbtöne) und Lebendigkeit (`k`) in `script.json` einstellen.
+
+**Profilbild:** `profile/quix_profile_purple.png` und `profile/quix_profile_teal.png` (2048×2048, kreissicher),
+Vorschau in Feed-Größen: `profile/quix_profile_preview.png`.
 
 ## Quix – der Serien-Host (`quix_character_sheet.png`)
 - Lila „Bohne“ mit orangem Schal, weißen Handschuhen und Sneakern, cooler Halb-Lid-Blick.
@@ -19,7 +27,8 @@ Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, männliche St
 ```
 engine/            gemeinsame Serien-Engine
   voice.py         Stimme + wortgenaue Timings (liest <folge>/script.json)
-  patch_model.py   macht Kokoros Lautdauern als ONNX-Ausgang sichtbar
+  patch_model.py   Kokoro-Patch: Lautdauern als Ausgang + Ausdrucks-Regler für die Satzmelodie
+  avatar.js        rendert die Profilbilder
   render.js        Frames per Playwright (Canvas), parallel
   audio_mix.py     Serien-Musik + SFX-Bank + Ducking + Mix
   compose.sh       komplette Pipeline für eine Folge

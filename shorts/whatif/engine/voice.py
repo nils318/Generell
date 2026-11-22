@@ -1,9 +1,13 @@
 """WHAT IF? voice-over with exact word timings (any episode).
 
-Kokoro-82M (ONNX). The stock export only returns audio, so we use a patched
-copy of the graph that also exposes the per-phoneme duration tensor
-(`/encoder/Gather_output_0`, 1 frame = 600 samples @ 24 kHz). That gives us
-frame-exact word timings for subtitles and lip sync without any aligner.
+Kokoro-82M (ONNX), patched by patch_model.py:
+- per-phoneme durations (1 frame = 600 samples @ 24 kHz) -> frame-exact word timings
+  for subtitles and lip sync without any aligner;
+- a pitch-expressiveness control: the predicted intonation curve is widened around the
+  line's own median pitch (script "expr", per-line "k") and can be shifted per line
+  ("pitch" in semitones) before the decoder renders it.
+
+script.json: {"voice", "speed", "expr", "lines": [[cue, text, pause, {speed, pitch, k}?], ...]}
 
 usage: python voice.py <model_dir> <episode_dir>   (reads <episode>/script.json, writes <episode>/build/)
 """
@@ -16,12 +20,15 @@ import os
 MODEL_DIR, EP = sys.argv[1], sys.argv[2]
 OUT = os.path.join(EP, "build"); os.makedirs(OUT, exist_ok=True)
 SCRIPT = json.load(open(os.path.join(EP, "script.json")))
-VOICE, SPEED, SR, FPS = SCRIPT.get("voice", "am_michael"), SCRIPT.get("speed", 1.0), 24000, 30
-# (cue, text, pause_after_s). Display overrides: [shown|spoken]
-LINES = [tuple(l) for l in SCRIPT["lines"]]
+VOICE, SPEED, SR, FPS = SCRIPT.get("voice", "am_fenrir"), SCRIPT.get("speed", 1.0), 24000, 30
+EXPR = SCRIPT.get("expr", 1.0)
+# (cue, text, pause_after_s, options). Display overrides: [shown|spoken]
+LINES = [(l[0], l[1], l[2], l[3] if len(l) > 3 else {}) for l in SCRIPT["lines"]]
 LEAD_IN = 0.25
 
-k = Kokoro(f"{MODEL_DIR}/kokoro-timed.onnx", f"{MODEL_DIR}/voices-v1.0.bin")
+import onnxruntime as rt
+k = Kokoro(f"{MODEL_DIR}/kokoro-v1.0.onnx", f"{MODEL_DIR}/voices-v1.0.bin")  # tokenizer + voices
+sess = rt.InferenceSession(f"{MODEL_DIR}/kokoro-expr.onnx")
 style_bank = k.voices[VOICE]
 
 
@@ -38,14 +45,22 @@ def parse(text):
     return " ".join(spoken), disp
 
 
-def synth(text):
+def synth(text, opt):
     ph = " ".join(k.tokenizer.phonemize(text, "en-us").split())
     toks = k.tokenizer.tokenize(ph)
     assert len(toks) == len(ph), "phoneme/token mismatch (unknown symbol)"
-    audio, dur = k.sess.run(None, {
-        "tokens": np.array([[0, *toks, 0]], dtype=np.int64),
-        "style": style_bank[len(toks) - 1],
-        "speed": np.array([SPEED], dtype=np.float32)})
+    feed = {"tokens": np.array([[0, *toks, 0]], dtype=np.int64), "style": style_bank[len(toks) - 1],
+            "speed": np.array([SPEED * opt.get("speed", 1.0)], dtype=np.float32)}
+    f = lambda x: np.array([x], np.float32)
+    run = lambda lref, khi, klo, lsh: sess.run(None, {**feed, "f0_lref": f(lref), "f0_khi": f(khi), "f0_klo": f(klo), "f0_lshift": f(lsh)})
+    khi, shift = opt.get("k", EXPR), 2 ** (opt.get("pitch", 0) / 12)
+    klo = 1 + (khi - 1) * 0.25                     # lows move much less than peaks
+    _, _, f0 = run(0.0, 1.0, 1.0, 0.0)             # pass 1: natural intonation
+    voiced = f0.ravel()[f0.ravel() > 50]
+    ref = float(np.median(voiced)) if len(voiced) else 120.0
+    audio, dur, _ = run(np.log(ref), khi, klo, np.log(shift))   # pass 2: livelier melody
+    r = np.log(voiced / ref); rx = np.where(r > 0, r * khi, r * klo)
+    STATS.append((np.std(12 * r / np.log(2)), np.std(12 * rx / np.log(2)), ref * np.exp(rx.max()) * shift))
     audio, dur = audio.ravel(), dur.ravel()
     edges = np.concatenate([[0], np.cumsum(dur)]) * 600  # sample offset per token boundary
     # phoneme-words = runs of non-space tokens; token i spans edges[i+1]..edges[i+2]
@@ -58,6 +73,7 @@ def synth(text):
 
 
 PUNCT = set(".,!?;:…—\"'ˈˌ")
+STATS = []
 
 
 def plen(word):
@@ -109,9 +125,9 @@ def trim(audio, thr=0.004):
 
 
 track, t, timeline = [np.zeros(int(LEAD_IN * SR), np.float32)], LEAD_IN, []
-for cue, text, pause in LINES:
+for cue, text, pause, opt in LINES:
     spoken, disp = parse(text)
-    audio, pw, edges, ph = synth(spoken)
+    audio, pw, edges, ph = synth(spoken, opt)
     audio, cut = trim(audio)
     times = align(spoken.split(), pw, edges)
     words, i = [], 0
@@ -139,4 +155,5 @@ rms = np.convolve(rms, [0.25, 0.5, 0.25], "same")
 mouth = np.clip((rms - 0.012) / (np.percentile(rms, 95) - 0.012), 0, 1)
 json.dump({"fps": FPS, "duration": round(len(voice) / SR, 3), "lines": timeline,
            "mouth": [round(float(x), 3) for x in mouth]}, open(f"{OUT}/timeline.json", "w"), indent=1)
-print(f"total {len(voice) / SR:.2f}s")
+st = np.array(STATS)
+print(f"total {len(voice) / SR:.2f}s   voice {VOICE}  pitch variation {st[:, 0].mean():.2f} -> {st[:, 1].mean():.2f} semitones, peak {st[:, 2].max():.0f} Hz")

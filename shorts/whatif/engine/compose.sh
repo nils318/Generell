@@ -1,7 +1,8 @@
 #!/bin/bash
 # WHAT IF? pipeline for one episode.
 #   engine/compose.sh <episode_dir> <output.mp4> [kokoro_model_dir]
-# kokoro_model_dir holds kokoro-timed.onnx (see patch_model.py) + voices-v1.0.bin; omit it to reuse build/voice.wav.
+# kokoro_model_dir holds kokoro-v1.0.onnx, kokoro-expr.onnx (from patch_model.py) + voices-v1.0.bin;
+# omit it to reuse build/voice.wav.
 set -e
 ENG="$(cd "$(dirname "$0")" && pwd)"; EP="$1"; OUT="$2"
 if [ -n "$3" ]; then python3 "$ENG/voice.py" "$3" "$EP"; fi      # build/voice.wav + timeline.json
