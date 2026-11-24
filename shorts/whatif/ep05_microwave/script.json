@@ -1,0 +1,22 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.06,
+ "expr": 1.3,
+ "music": false,
+ "lines": [
+  ["hook", "Look closely at your microwave door. See all those tiny holes?", 0.35, {"pitch": 0.5}],
+  ["reveal", "That metal mesh is a shield.", 0.45],
+  ["intro", "I'm Quix.", 0.15, {"pitch": 1}],
+  ["delete", "And today... I'm deleting it!", 0.9, {"pitch": 1.5, "k": 1.5}],
+  ["wifi", "Uh oh. Did anyone else just lose their Wi-Fi?", 0.4, {"pitch": 1, "k": 1.5}],
+  ["freq", "Microwaves and Wi-Fi use almost the same frequency.", 0.3],
+  ["leak", "Without the mesh, those waves pour straight out of the door. The same waves that heat your food.", 0.3],
+  ["water", "They make water molecules wiggle... including the water in you.", 0.45, {"pitch": -0.5}],
+  ["how", "So how can tiny holes stop them? Microwaves are about [12|twelve] centimeters long.", 0.25, {"pitch": 0.5}],
+  ["holes", "The holes are only a millimeter or two. The waves are way too big to squeeze through. But light? Light fits easily.", 0.4],
+  ["history", "Fun fact: in [1945|nineteen forty-five], engineer Percy Spencer was working near radar equipment, and the candy bar in his pocket melted.", 0.35, {"speed": 1.04}],
+  ["giant", "The first microwave oven was almost six feet tall!", 0.4, {"pitch": 1}],
+  ["restore", "So that boring little mesh? It lets you watch your popcorn without cooking yourself.", 0.45, {"pitch": 0.5}],
+  ["outro", "So... what should I delete next?", 1.6, {"pitch": 1, "k": 1.5}]
+ ]
+}

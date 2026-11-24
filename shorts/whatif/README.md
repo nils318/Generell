@@ -4,6 +4,11 @@
 |---|---|---|
 | #1 | What if toilets had no U-bend? | `ep01_toilet/WhatIf_01_Toilet_UBend.mp4` (47 s) |
 | #2 | What if car exhaust wasn't filtered? (Katalysator gelöscht) | `ep02_exhaust/WhatIf_02_Car_Exhaust.mp4` (53 s) |
+| #3 | What if plane windows had no tiny hole? (Atmungsloch) | `ep03_plane/WhatIf_03_Plane_Window.mp4` (46 s) |
+| #4 | What if coins had no ridges? (Reeding, Isaac Newton) | `ep04_coins/WhatIf_04_Coin_Ridges.mp4` (57 s) |
+| #5 | What if microwaves had no metal mesh? (Türgitter) | `ep05_microwave/WhatIf_05_Microwave_Mesh.mp4` (56 s) |
+
+Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
 (nur Stimme + Soundeffekte; wieder einschalten mit `"music": true` in `script.json`).
@@ -51,5 +56,16 @@ bilden mit Sonnenlicht Smog/Ozon. Stickoxide werden zu Salpetersäure (saurer Re
 Los Angeles den Smog für einen Gasangriff. Ab Modelljahr 1975 hatten die meisten neuen US-Benziner einen Kat.
 Hinweis: Die 1975er-Kats waren Zwei-Wege-Kats (CO + HC). Stickoxide filtern erst die Drei-Wege-Kats ab etwa 1981.
 Der Kat stoppt kein CO₂.
+
+**#3** Das Atmungsloch in der mittleren Scheibe gleicht den Druck zum Kabinenraum aus. So trägt die äußere Scheibe die Last,
+und die mittlere bleibt Reserve. Zudem kann Feuchtigkeit entweichen, sonst beschlägt und vereist das Fenster
+([Time](https://time.com/4725944/tiny-hole-airplane-windows-travel), [Mental Floss](https://www.mentalfloss.com/transportation/planes-airports/why-airplane-windows-have-tiny-holes)).
+**#4** Wer Silbermünzen abschabte („clipping“), beging in England Hochverrat. Gerändelte Kanten machen das Abschaben sichtbar.
+Isaac Newton wurde 1696 Warden der Royal Mint und verfolgte Fälscher. Heute helfen Rillen Blinden, Münzen zu ertasten
+([Wikipedia: Reeding](https://en.wikipedia.org/wiki/Reeding), [Great Recoinage 1696](https://en.Wikipedia.com/wiki/Great_Recoinage_of_1696)).
+**#5** Mikrowellen (2,45 GHz) sind ca. 12 cm lang, die Löcher im Türgitter nur 0,2–2 mm, also werden sie reflektiert,
+Licht kommt durch. WLAN funkt auf 2,4 GHz. 1945 schmolz Percy Spencer ein Süßigkeitenriegel in der Tasche (welcher, ist
+umstritten). Der Radarange von 1947 war fast 1,8 m hoch
+([IEEE Spectrum](https://spectrum.ieee.org/a-history-of-the-microwave-oven), [Wikipedia: Percy Spencer](https://en.wikipedia.org/wiki/Percy_Spencer)).
 
 Schriften: Bungee & Lilita One (SIL Open Font License). Musik und Soundeffekte sind komplett synthetisiert.

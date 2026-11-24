@@ -99,3 +99,79 @@ function smokeCloud(ctx, x, y, s, a, t, seed = 1, fill = '#6E625A') {
   for (const [lx, ly, lr] of lobes) { ctx.beginPath(); ctx.arc(lx - lr * 0.3, ly - lr * 0.35, lr * 0.3, 0, 7); ctx.fill(); }
   ctx.restore();
 }
+
+// ---------------------------------------------------------------- shared overlays (EP03+)
+// white info chip with optional coloured dot
+function chip(ctx, s, x, y, a, dot, size = 50) {
+  if (a <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(a, a);
+  ctx.font = `${size}px Lilita`; const w = ctx.measureText(s).width + (dot ? 110 : 60) * size / 50;
+  pill(ctx, 0, 0, w, size * 1.84, '#fff', INK, 8);
+  if (dot) { ctx.fillStyle = dot; ctx.strokeStyle = INK; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(-w / 2 + size, 0, size * 0.44, 0, 7); ctx.fill(); ctx.stroke(); }
+  txt(ctx, s, dot ? size * 0.5 : 0, size * 0.08, { size, color: INK, shadow: false });
+  ctx.restore();
+}
+
+// yellow pill label with dotted leader line to a target point
+function bigLabel(ctx, s, x, y, ax, ay, a, size = 54, col = '#FFD43B') {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha *= clamp(a);
+  if (ax != null) {
+    ctx.strokeStyle = col; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.setLineDash([2, 14]);
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(ax, ay); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(ax, ay, 12, 0, 7); ctx.fill();
+  }
+  const sc = ease.back(clamp(a * 1.2)); ctx.translate(x, y); ctx.scale(sc, sc);
+  ctx.font = `${size}px Bungee`; const tw = ctx.measureText(s).width;
+  pill(ctx, 0, 0, tw + 70, size * 1.78, col, INK, 8);
+  txt(ctx, s, 0, size * 0.07, { size, font: 'Bungee', color: INK, shadow: false });
+  ctx.restore();
+}
+
+// generic "pixel dissolve": snapshot drawFn into particles once, then dissolve by p (0..1)
+function makeDissolver(drawFn, box, cell = 9, seed = 9) {
+  let parts = null;
+  return (ctx, p) => {
+    if (!parts) {
+      const c = off(), g = c.getContext('2d'); drawFn(g);
+      const d = g.getImageData(0, 0, W, H).data, R = rng(seed), out = [];
+      const cx = (box[0] + box[2]) / 2, cy = (box[1] + box[3]) / 2, rad = Math.hypot(box[2] - box[0], box[3] - box[1]) / 2;
+      for (let y = box[1]; y < box[3]; y += cell) for (let x = box[0]; x < box[2]; x += cell) {
+        const i = ((Math.round(y + cell / 2)) * W + Math.round(x + cell / 2)) * 4;
+        if (d[i + 3] > 80) out.push({ x, y, c: `rgb(${d[i]},${d[i + 1]},${d[i + 2]})`, vx: (R() - 0.5) * 2, vy: -R() * 2 - 0.4, r: R() * 6, d: Math.hypot(x - cx, y - cy) / rad });
+      }
+      parts = out;
+    }
+    if (p <= 0) return false;
+    ctx.save();
+    for (const q of parts) {
+      const k = clamp((p * 1.6 - q.d * 0.5) / 0.9);
+      if (k >= 1) continue;
+      const e = k * k;
+      ctx.globalAlpha = 1 - k; ctx.fillStyle = k > 0.05 && hash(q.x * 3 + q.y) > 0.5 ? '#FFF6C2' : q.c;
+      ctx.save(); ctx.translate(q.x + q.vx * e * 380, q.y + q.vy * e * 380); ctx.rotate(q.r * e * 3);
+      const s = cell * (1 - 0.5 * k); ctx.fillRect(-s / 2, -s / 2, s, s); ctx.restore();
+    }
+    ctx.restore();
+    return true;
+  };
+}
+
+// VHS rewind overlay (draw the scene first). k: 0..1 progress
+function rewindFX(ctx, t, k, from, to) {
+  ctx.save(); ctx.globalCompositeOperation = 'color'; ctx.fillStyle = '#3050A0'; ctx.globalAlpha = 0.6; ctx.fillRect(0, 0, W, H); ctx.restore();
+  ctx.fillStyle = 'rgba(5,10,30,0.45)'; ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 8; i++) { const y = hash(i + Math.floor(t * 30)) * H; ctx.fillStyle = 'rgba(255,255,255,0.18)'; ctx.fillRect(0, y, W, 6 + hash(i) * 20); }
+  glitch(0.5, Math.floor(t * 30));
+  txt(ctx, '◀◀ REWIND', 60, 250, { size: 60, font: 'Bungee', align: 'left', color: '#fff', stroke: 12 });
+  if (from != null) txt(ctx, String(Math.round(lerp(from, to, ease.in(k)))), 540, 860, { size: 240, font: 'Bungee', color: '#fff', stroke: 26, glow: '#5CE1FF', glowBlur: 40 });
+}
+
+function sepiaVignette(ctx) {
+  const vg = ctx.createRadialGradient(540, 960, 600, 540, 960, 1250);
+  vg.addColorStop(0, 'rgba(60,35,10,0)'); vg.addColorStop(1, 'rgba(60,35,10,0.55)');
+  ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+}
+
+// run fn in untransformed screen space (for overlays inside zoomed shots)
+function screenSpace(ctx, fn) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); fn(); ctx.restore(); }

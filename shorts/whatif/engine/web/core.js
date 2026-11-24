@@ -247,6 +247,10 @@ function renderFrame(f) {
   const cam = shot.cam ? shot.cam(t) : { z: 1, x: 540, y: 960 };
   const punch = shot.flash === false ? 1 : 1 + 0.07 * (1 - ease.out(seg(t, shot.a, shot.a + 0.3)));
   const sh = cam.shake || 0;
+  if (cam.z >= 1 && !shot.noClamp) { // never reveal the void outside the 1080x1920 world
+    const hw = 540 / cam.z, hh = 960 / cam.z;
+    cam.x = clamp(cam.x, hw, W - hw); cam.y = clamp(cam.y, hh, H - hh);
+  }
   ctx.save();
   ctx.translate(540, 960); ctx.scale(cam.z * punch, cam.z * punch);
   ctx.translate(-cam.x + noise1(t * 13) * sh, -cam.y + noise1(t * 13 + 50) * sh);

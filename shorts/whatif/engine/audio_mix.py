@@ -206,6 +206,64 @@ BANK.update({"engine": s_engine, "engine_dirty": lambda: s_engine(2.0, 1.0), "co
              "thunder": s_thunder, "sizzle": s_sizzle})
 GAIN.update({"engine": 0.6, "engine_dirty": 0.8, "traffic": 0.6, "rain": 0.7, "thunder": 0.9})
 
+
+# ---- EP03-EP05 additions
+def s_chime():
+    out = np.zeros(int(1.6 * SR))
+    for at, f in [(0.0, 1046.5), (0.45, 784.0)]:
+        x = tt(1.1); b = (np.sin(2 * np.pi * f * x) + 0.3 * np.sin(4 * np.pi * f * x)) * np.exp(-x * 3.2) * 0.25
+        out[int(at * SR):int(at * SR) + len(b)] += b
+    return out
+def s_cabin():
+    d = 3.0; x = tt(d); return lp(noise(d), 350) * 0.6 * np.minimum(1, x / 0.4) * np.minimum(1, (d - x) / 0.6)
+def s_crack():
+    out = np.zeros(int(0.8 * SR))
+    for i in range(14):
+        at = int((i * 0.035 + R.uniform(0, 0.02)) * SR); c = hp(noise(0.03), 2500) * env(int(0.03 * SR), 0.0003, 0.006) * R.uniform(0.3, 0.8)
+        out[at:at + len(c)] += c
+    return out + np.pad(lp(noise(0.3), 400) * env(int(0.3 * SR), 0.001, 0.08) * 0.5, (0, len(out) - int(0.3 * SR)))
+def s_freeze():
+    d = 1.4; x = tt(d); out = np.zeros(len(x))
+    for i in range(18):
+        f = R.uniform(2500, 6000); at = R.uniform(0, 1.0)
+        b = np.sin(2 * np.pi * f * tt(0.4)) * env(int(0.4 * SR), 0.002, 0.08) * 0.06
+        out[int(at * SR):int(at * SR) + len(b)] += b
+    return out + hp(noise(d), 5000) * np.sin(np.linspace(0, np.pi, len(x))) * 0.05
+def s_coin():
+    x = tt(1.0); return sum(np.sin(2 * np.pi * f * x) * w for f, w in [(3120, 1), (4410, 0.6), (5830, 0.4), (2210, 0.3)]) * np.exp(-x * 6) * 0.18 \
+        + hp(noise(1.0), 3000) * env(len(x), 0.0005, 0.01) * 0.3
+def s_scrape():
+    d = 0.9; x = tt(d); m = 0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 7 * x))
+    return bp(noise(d), 2000, 7000) * m * np.sin(np.linspace(0, np.pi, len(x))) * 0.35
+def s_bonk():
+    d = 0.4; x = tt(d)
+    return (np.sin(2 * np.pi * (420 * np.exp(-x * 6) + 120) * x) * np.exp(-x * 14) * 0.8 + lp(noise(d), 1500) * env(len(x), 0.001, 0.02) * 0.4)
+def s_mw_hum():
+    d = 2.6; x = tt(d)
+    return (np.sin(2 * np.pi * 120 * x) * 0.3 + np.sin(2 * np.pi * 240 * x) * 0.15 + lp(noise(d), 800) * 0.15) * np.minimum(1, x / 0.2) * np.minimum(1, (d - x) / 0.4) * 0.6
+def s_beep3():
+    out = np.zeros(int(1.2 * SR))
+    for k in range(3):
+        b = np.sign(np.sin(2 * np.pi * 2000 * tt(0.18))) * env(int(0.18 * SR), 0.002, 0.5) * 0.08
+        out[int(k * 0.3 * SR):int(k * 0.3 * SR) + len(b)] += lp(b, 5000)
+    return out
+def s_popcorn():
+    out = np.zeros(int(1.5 * SR))
+    for i in range(16):
+        at = int(R.uniform(0, 1.4) * SR); c = bp(noise(0.02), 800, 4000) * env(int(0.02 * SR), 0.0003, 0.004) * R.uniform(0.4, 1)
+        out[at:at + len(c)] += c
+    return out
+def s_wifi_down():
+    out = np.zeros(int(1.0 * SR))
+    for k, f in enumerate([1320, 1100, 880, 660]):
+        b = np.sin(2 * np.pi * f * tt(0.12)) * env(int(0.12 * SR), 0.002, 0.08) * 0.25
+        out[int(k * 0.16 * SR):int(k * 0.16 * SR) + len(b)] += b
+    return out
+
+BANK.update({"chime": s_chime, "cabin": s_cabin, "crack": s_crack, "freeze": s_freeze, "coin": s_coin, "scrape": s_scrape,
+             "bonk": s_bonk, "mw_hum": s_mw_hum, "beep3": s_beep3, "popcorn": s_popcorn, "wifi_down": s_wifi_down})
+GAIN.update({"cabin": 0.5, "mw_hum": 0.6, "popcorn": 0.8})
+
 sfx = np.zeros(N)
 for c in CUES:
     s = BANK[c["n"]]() * GAIN.get(c["n"], 0.85) * c.get("g", 1)

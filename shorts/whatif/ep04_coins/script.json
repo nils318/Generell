@@ -1,0 +1,23 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.06,
+ "expr": 1.3,
+ "music": false,
+ "lines": [
+  ["hook", "Ever noticed the tiny ridges on the edge of some coins?", 0.35, {"pitch": 0.5}],
+  ["reveal", "They're called reeding. And they once stopped a crime wave.", 0.45],
+  ["intro", "I'm Quix.", 0.15, {"pitch": 1}],
+  ["delete", "And today... I'm deleting them!", 0.9, {"pitch": 1.5, "k": 1.5}],
+  ["react", "Smooth. Shiny. What could go wrong?", 0.4, {"pitch": 1}],
+  ["past", "Let's rewind to the [1600s|sixteen hundreds].", 0.3],
+  ["silver", "Back then, coins were made of real silver. So people shaved tiny slivers off the edges.", 0.25],
+  ["melt", "Collect enough shavings, melt them down... free silver!", 0.3, {"pitch": 1}],
+  ["spend", "And the clipped coin? Still spent at full value.", 0.35],
+  ["trust", "Soon, so many coins were clipped that nobody trusted money anymore.", 0.3, {"pitch": -0.5}],
+  ["treason", "It got so bad, clipping coins was high treason. You could be executed for it.", 0.4, {"pitch": -1}],
+  ["fix", "The fix? Ridges on the edge. Shave one, and everybody can see it.", 0.35, {"pitch": 0.5}],
+  ["newton", "And in [1696|sixteen ninety-six], the man hunting counterfeiters for the Royal Mint? Isaac Newton. Yes, the gravity guy.", 0.45, {"k": 1.45}],
+  ["today", "Today, coins are mostly cheap metal. But the ridges stayed... and now they help blind people tell coins apart by touch.", 0.45],
+  ["outro", "So... what should I delete next?", 1.6, {"pitch": 1, "k": 1.5}]
+ ]
+}
