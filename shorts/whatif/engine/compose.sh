@@ -9,8 +9,10 @@ if [ -n "$3" ]; then python3 "$ENG/voice.py" "$3" "$EP"; fi      # build/voice.w
 rm -rf "$EP/build/frames"
 node "$ENG/render.js" "$EP" --workers 4                           # build/frames + sfx/shots/music.json
 python3 "$ENG/audio_mix.py" "$EP"                                 # build/mix.wav
+# encode into build/ first, move into place only when complete (no half-written videos in the repo)
 ffmpeg -y -v error -framerate 30 -i "$EP/build/frames/%05d.png" -i "$EP/build/mix.wav" \
   -c:v libx264 -preset slow -crf 19 -pix_fmt yuv420p -profile:v high -r 30 \
   -af "loudnorm=I=-14:TP=-1.5:LRA=11" -c:a aac -b:a 192k -ar 48000 \
-  -shortest -movflags +faststart "$OUT"
+  -shortest -movflags +faststart "$EP/build/encode.mp4"
+mv "$EP/build/encode.mp4" "$OUT"
 echo "-> $OUT"
