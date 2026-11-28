@@ -1,0 +1,138 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.18,
+ "expr": 1.4,
+ "music": false,
+ "lines": [
+  [
+   "preview",
+   "Oh, fuck! My shoelace just got eaten by an escalator!",
+   0.5,
+   {
+    "pitch": 2,
+    "k": 1.6
+   }
+  ],
+  [
+   "hook",
+   "Look at an escalator. See those little brushes on the sides?",
+   0.2,
+   {
+    "pitch": 0.5
+   }
+  ],
+  [
+   "reveal",
+   "Those are side brushes. Everybody walks past them. Nobody thinks about them.",
+   0.25
+  ],
+  [
+   "crowd",
+   "Think about it. Thousands of people step on one of these every single day.",
+   0.25
+  ],
+  [
+   "intro",
+   "I'm Quix.",
+   0.1,
+   {
+    "pitch": 1
+   }
+  ],
+  [
+   "delete",
+   "And today... I'm deleting them! Every single brush!",
+   0.4,
+   {
+    "pitch": 1.5,
+    "k": 1.5
+   }
+  ],
+  [
+   "catch",
+   "Now a shoe slides right into the gap. Crunch! Holy fuck, that's an expensive sneaker.",
+   0.35,
+   {
+    "pitch": 1,
+    "k": 1.6
+   }
+  ],
+  [
+   "sucked",
+   "The shoe gets pulled down, and the steps keep moving. Not good at all.",
+   0.3
+  ],
+  [
+   "purpose",
+   "The brushes keep feet, shoelaces and clothes away from the gap between the steps and the side wall.",
+   0.25
+  ],
+  [
+   "kids",
+   "And small kids are the ones who get closest to that gap.",
+   0.3
+  ],
+  [
+   "tiny",
+   "That gap is tiny, but toes and laces fit right in.",
+   0.3
+  ],
+  [
+   "stop",
+   "They don't stop the escalator, though. That's the emergency stop button's job.",
+   0.3,
+   {
+    "pitch": 0.5
+   }
+  ],
+  [
+   "grab",
+   "If something gets caught, don't yank it. Hit the red stop button, and get help.",
+   0.3
+  ],
+  [
+   "roast",
+   "So you're not cleaning your shoes on them, buddy. Those brushes are not a shoe shine.",
+   0.35,
+   {
+    "pitch": 1,
+    "k": 1.6,
+    "speed": 1.12
+   }
+  ],
+  [
+   "dust",
+   "Those brushes are for keeping stuff out. Not for dusting your socks.",
+   0.3,
+   {
+    "pitch": 1,
+    "k": 1.5
+   }
+  ],
+  [
+   "remember",
+   "So next time you step on an escalator, look down. Your shoelace is in danger.",
+   0.35,
+   {
+    "pitch": 0.5
+   }
+  ],
+  [
+   "last",
+   "Seriously, look down right now. Your shoes are closer to that gap than you think.",
+   0.35,
+   {
+    "pitch": 0.5
+   }
+  ],
+  [
+   "outro",
+   "So... what should I delete next?",
+   1.2,
+   {
+    "pitch": 1,
+    "k": 1.5
+   }
+  ]
+ ]
+}

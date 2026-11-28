@@ -8,8 +8,12 @@
 | #4 | What if coins had no ridges? (Reeding, Isaac Newton) | `ep04_coins/WhatIf_04_Coin_Ridges.mp4` (57 s) |
 | #5 | What if microwaves had no metal mesh? (Türgitter) | `ep05_microwave/WhatIf_05_Microwave_Mesh.mp4` (56 s) |
 | #6 | What if tires had no tread? (Aquaplaning) | `ep06_tires/WhatIf_06_Tire_Tread.mp4` (64 s) |
+| #7 | What if escalators had no side brushes? (Rolltreppe) | `ep07_escalator/WhatIf_07_Escalator_Brushes.mp4` (65 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
+
+**Format ab #7:** Jede Folge beginnt mit einer Vorschau (dem lustigsten Moment, mit „PREVIEW“-Label), danach kommt das Thema.
+Tempo 1,18, mindestens 60 Sekunden.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
 (nur Stimme + Soundeffekte; wieder einschalten mit `"music": true` in `script.json`).
@@ -72,5 +76,9 @@ umstritten). Der Radarange von 1947 war fast 1,8 m hoch
 **#6** Profil leitet Wasser aus der Kontaktfläche. Neue Reifen verdrängen laut Continental bis ca. 30 Liter Wasser pro Sekunde bei 80 km/h
 ([Continental: Aquaplaning](https://continental-tires.com/ca/en/b2c/tire-knowledge/aquaplaning)). Mindestprofil in den meisten EU-Ländern: 1,6 mm.
 F1-Slicks haben kein Profil, bis es regnet. Herstellerangaben, nicht unabhängig getestet.
+
+**#7** Die Seitenbürsten halten Füße, Schnürsenkel und Kleidung vom Spalt zwischen Stufen und Seitenwand fern.
+Sie stoppen die Rolltreppe nicht, dafür ist der Not-Aus da ([KONE](https://www.kone.com.au/blogs/why-do-escalators-have-brushes.aspx),
+[Elevator World](https://elevatorworld.com/blog/the-true-purpose-of-escalator-brushes/)).
 
 Schriften: Bungee & Lilita One (SIL Open Font License). Musik und Soundeffekte sind komplett synthetisiert.

@@ -13,6 +13,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 | 4 | Münzen | Rillen am Rand (Reeding) |
 | 5 | Mikrowelle | Metallgitter in der Tür |
 | 6 | Autoreifen | Profil (Aquaplaning) |
+| 7 | Rolltreppe | Seitenbürsten |
 
 ## Nächste Kandidaten (nach Stärke sortiert)
 
@@ -31,7 +32,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 - **Status:** geprüft.
 - **Quellen:** [Google Patents US139121](https://patents.google.com/patent/US139121), [History.com](https://www.history.com/this-day-in-history/may-20/levi-strauss-and-jacob-davis-receive-patent-for-blue-jeans), [National Archives Blog](https://prologue.blogs.archives.gov/2010/05/20/forever-in-blue-jeansand-in-court/)
 
-### 3. Rolltreppe ohne Seitenbürsten
+### 3. Rolltreppe ohne Seitenbürsten — **umgesetzt als #7**
 - **Hook:** „Those brushes on the side of escalators are NOT for cleaning your shoes.“
 - **Kern:** Sie halten Füße, Schnürsenkel und Kleidung vom Spalt zwischen Stufen und Seitenwand fern (Einklemmgefahr).
   Wichtig: Sie stoppen die Rolltreppe nicht, dafür gibt es den Not-Aus.
