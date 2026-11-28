@@ -20,7 +20,7 @@ window.EPISODE = {
       low:   [[9, 1.6, -22], [0, 21, -70], 52],
       tombs: [[-2, 5.5, -16], [-4, 2, -40], 44],
       sled:  [[7.0, 4.2, 19], [1.6, 1.4, 5.5], 40],
-      water: [[5.5, 3.0, 14.5], [1.6, 0.8, 6.8], 40],
+      water: [[7.5, 3.8, 15.5], [1.2, 0.7, 7.0], 38],
       sky:   [[0, 6, 40], [0, 28, -100], 46],
     };
     const l3 = (a, b, k) => a.map((v, i) => lerp(v, b[i], k));
@@ -94,7 +94,7 @@ window.EPISODE = {
     };
     const timeline = (t, t0) => {              // Cleopatra closer to the Moon landing than to the pyramid
       const a = ease.out(seg(t, t0, t0 + 0.6)); if (a <= 0) return;
-      const y = 820, x0 = 110, x1 = 970, yr = v => lerp(x0, x1, (v + 2600) / (2000 + 2600));
+      const y = 820, x0 = 190, x1 = 880, yr = v => lerp(x0, x1, (v + 2600) / (2000 + 2600));
       ctx.save(); ctx.globalAlpha = a;
       ctx.strokeStyle = '#fff'; ctx.lineWidth = 14; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(lerp(x0, x1, a), y); ctx.stroke();
       const marks = [[-2560, 'PYRAMIDE', '2560 v. Chr.', '#FFD43B', t0 + 0.2], [-30, 'KLEOPATRA', '30 v. Chr.', '#FF5A9A', WF('cleo', 'kleopatra') - 0.1], [1969, 'MONDLANDUNG', '1969', '#5CE1FF', WF('cleo', 'mondlandung') - 0.1]];
