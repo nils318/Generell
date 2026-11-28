@@ -15,4 +15,6 @@ ffmpeg -y -v error -framerate 30 -i "$EP/build/frames/%05d.png" -i "$EP/build/mi
   -af "loudnorm=I=-14:TP=-1.5:LRA=11" -c:a aac -b:a 192k -ar 48000 \
   -shortest -movflags +faststart "$EP/build/encode.mp4"
 mv "$EP/build/encode.mp4" "$OUT"
+# frames are ~5 GB per episode; drop them unless KEEP_FRAMES=1 (re-render any time)
+[ "$KEEP_FRAMES" = "1" ] || rm -rf "$EP/build/frames"
 echo "-> $OUT"
