@@ -10,11 +10,14 @@
 | #6 | What if tires had no tread? (Aquaplaning) | `ep06_tires/WhatIf_06_Tire_Tread.mp4` (64 s) |
 | #7 | What if escalators had no side brushes? (Rolltreppe) | `ep07_escalator/WhatIf_07_Escalator_Brushes.mp4` (65 s) |
 | #8 | What if jeans had no rivets? (Levi Strauss, 1873) | `ep08_jeans/WhatIf_08_Jeans_Rivets.mp4` (70 s) |
+| #9 | What if keyboards had no bumps? (F/J, **erste 3D-Folge**) | `ep09_keyboard/WhatIf_09_Keyboard_Bumps.mp4` (65 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
 **Format ab #7:** Jede Folge beginnt mit einer Vorschau (dem lustigsten Moment, mit „PREVIEW“-Label), danach kommt das Thema.
 Tempo 1,18, mindestens 60 Sekunden. Quix hat eigene Sprüche, die witzig sind und dabei etwas erklären.
+**Pointen ab #9:** eigene Zeile mit `pre` (Pause davor), langsamer, höher, `k` 1,9 und `gain` +3 dB, danach Rimshot oder Plattenkratzer.
+**3D ab #9:** `engine/web/q3d.js` (three.js r150, Toon-Look mit Konturen, 3D-Quix). Untertitel und Labels bleiben 2D darüber.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
 (nur Stimme + Soundeffekte; wieder einschalten mit `"music": true` in `script.json`).
@@ -84,5 +87,7 @@ Sie stoppen die Rolltreppe nicht, dafür ist der Not-Aus da ([KONE](https://www.
 **#8** Nieten sichern die Taschenecken, wo der Stoff am stärksten belastet wird. US-Patent 139,121 vom 20. Mai 1873 für Jacob W. Davis
 und Levi Strauss & Co. Davis konnte die Patentgebühr nicht zahlen, Strauss (sein Stofflieferant) übernahm sie
 ([Google Patents](https://patents.google.com/patent/US139121), [History.com](https://www.history.com/this-day-in-history/may-20/levi-strauss-and-jacob-davis-receive-patent-for-blue-jeans)).
+**#9** Die Huckel auf F und J markieren die Grundreihe fürs Zehnfingersystem: linker Zeigefinger auf F, rechter auf J.
+Die 5 im Ziffernblock hat ebenfalls einen Huckel ([PCWorld](https://www.pcworld.com/article/2337532/this-is-why-the-f-and-j-keys-on-keyboards-are-usually-raised.html)).
 
-Schriften: Bungee & Lilita One (SIL Open Font License). Musik und Soundeffekte sind komplett synthetisiert.
+Schriften: Bungee & Lilita One (SIL Open Font License). 3D: three.js (MIT, `engine/web/vendor/THREE_LICENSE`). Musik und Soundeffekte sind komplett synthetisiert.

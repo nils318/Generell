@@ -1,0 +1,27 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.18,
+ "expr": 1.4,
+ "music": false,
+ "lines": [
+  ["preview", "I typed hello, and it says [jr;;p|J, R, semicolon, semicolon, P].", 0.15, {"pitch": 1, "k": 1.5}],
+  ["previewb", "What the fuck?", 0.45, {"pitch": 3, "k": 1.9, "speed": 0.95, "gain": 3}],
+  ["hook", "Put your fingers on your keyboard. Feel those tiny bumps on F and J?", 0.2, {"pitch": 0.5}],
+  ["reveal", "Those little ridges are there for a reason.", 0.1],
+  ["roasta", "And no, it's not a factory mistake, genius.", 0.55, {"pre": 0.4, "pitch": 1.5, "k": 1.9, "speed": 0.98, "gain": 3}],
+  ["intro", "I'm Quix.", 0.1, {"pitch": 1}],
+  ["delete", "And today... I'm deleting them! Both of them!", 0.4, {"pitch": 1.5, "k": 1.5}],
+  ["blind", "Now try typing without looking. Your hands land one key too far to the right.", 0.2],
+  ["gibberish", "You wanted to write hello. You wrote [jr;;p|J, R, semicolon, semicolon, P].", 0.15, {"pitch": 0.5}],
+  ["roastb", "Congratulations. You now type like a confused pigeon.", 0.55, {"pre": 0.45, "pitch": 1.5, "k": 1.9, "speed": 0.95, "gain": 3}],
+  ["why", "Those bumps mark the home row. Your left index finger goes on F. Your right index finger goes on J.", 0.2],
+  ["home", "From there, every other finger knows exactly where its keys are. That's called touch typing.", 0.2],
+  ["fast", "That's how people type really fast, without ever looking down.", 0.1],
+  ["roastc", "Meanwhile you're out here hunting for the letter Q like it owes you money.", 0.55, {"pre": 0.4, "pitch": 1.5, "k": 1.9, "speed": 0.97, "gain": 3}],
+  ["numpad", "And there's one more. The five on the number pad has a bump too, so your fingers find the middle.", 0.25],
+  ["roastd", "So if you've been typing with two fingers your whole life... I'm not mad.", 0.25, {"pre": 0.3, "pitch": 0.5, "k": 1.6, "speed": 1.0}],
+  ["roastd2", "I'm just disappointed.", 0.6, {"pre": 0.35, "pitch": -1.5, "k": 1.4, "speed": 0.85, "gain": 2}],
+  ["last", "Those bumps are tiny. But they make you fast. Feel them right now.", 0.35, {"pitch": 0.5}],
+  ["outro", "So... what should I delete next?", 1.2, {"pitch": 1, "k": 1.5}]
+ ]
+}

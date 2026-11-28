@@ -7,7 +7,8 @@ Kokoro-82M (ONNX), patched by patch_model.py:
   line's own median pitch (script "expr", per-line "k") and can be shifted per line
   ("pitch" in semitones) before the decoder renders it.
 
-script.json: {"voice", "speed", "expr", "lines": [[cue, text, pause, {speed, pitch, k}?], ...]}
+script.json: {"voice", "speed", "expr", "lines": [[cue, text, pause, {speed, pitch, k, pre, gain}?], ...]}
+  pre = seconds of silence before the line (comedic beat), gain = dB boost for punchlines
 
 usage: python voice.py <model_dir> <episode_dir>   (reads <episode>/script.json, writes <episode>/build/)
 """
@@ -129,6 +130,10 @@ for cue, text, pause, opt in LINES:
     spoken, disp = parse(text)
     audio, pw, edges, ph = synth(spoken, opt)
     audio, cut = trim(audio)
+    if opt.get("pre"):   # comedic beat: silence before the line
+        track.append(np.zeros(int(opt["pre"] * SR), np.float32)); t += opt["pre"]
+    if opt.get("gain"):  # punchline: louder, softly saturated so it doesn't dominate the peak normalisation
+        audio = np.tanh(audio * 10 ** (opt["gain"] / 20) / 0.6) * 0.6
     times = align(spoken.split(), pw, edges)
     words, i = [], 0
     for w, n in disp:

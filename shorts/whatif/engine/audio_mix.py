@@ -264,6 +264,33 @@ BANK.update({"chime": s_chime, "cabin": s_cabin, "crack": s_crack, "freeze": s_f
              "bonk": s_bonk, "mw_hum": s_mw_hum, "beep3": s_beep3, "popcorn": s_popcorn, "wifi_down": s_wifi_down})
 GAIN.update({"cabin": 0.5, "mw_hum": 0.6, "popcorn": 0.8})
 
+# comedy + keyboard set (EP09+)
+def s_tom(f):
+    x = tt(0.35); return np.sin(2 * np.pi * (f + 60 * np.exp(-x * 25)) * x) * np.exp(-x * 9) * 0.8 + bp(noise(0.35), 150, 900) * env(int(0.35 * SR), 0.001, 0.03) * 0.3
+def s_rimshot():  # ba-dum-tss
+    out = np.zeros(int(1.4 * SR))
+    for t0, f in [(0.0, 190), (0.16, 140)]: put1(out, s_tom(f), t0)
+    x = tt(1.1); cym = hp(noise(1.1), 6000) * np.exp(-x * 3.0) * 0.55
+    put1(out, cym + bp(noise(1.1), 3000, 9000) * np.exp(-x * 4.5) * 0.25, 0.36)
+    return out * 0.9
+def s_scratch():  # record scratch: noisy tone sweeping back and forth
+    d = 0.45; x = tt(d); f = 400 + 900 * np.abs(np.sin(2 * np.pi * 2.3 * x))
+    tone = np.sin(2 * np.pi * np.cumsum(f) / SR); n = bp(noise(d), 500, 4000)
+    return (tone * 0.35 + n * 0.6) * np.sin(np.linspace(0, np.pi, len(x))) ** 0.5 * 0.7
+def s_key():
+    x = tt(0.06); return (hp(noise(0.06), 2500) * env(len(x), 0.0005, 0.012) + np.sin(2 * np.pi * 1800 * x) * env(len(x), 0.0005, 0.008) * 0.3) * 0.7
+def s_typing(d=1.6):
+    out = np.zeros(int(d * SR)); t0 = 0.0; r = np.random.default_rng(3)
+    while t0 < d - 0.08: put1(out, s_key() * (0.6 + 0.4 * r.random()), t0); t0 += 0.07 + 0.08 * r.random()
+    return out
+def s_error():
+    x = tt(0.5); sq = np.sign(np.sin(2 * np.pi * 110 * x)) * 0.5 + np.sign(np.sin(2 * np.pi * 116 * x)) * 0.5
+    return lp(sq, 1800) * env(len(x), 0.005, 0.4) * 0.35
+def put1(buf, sig, t0):
+    i = int(t0 * SR); e = min(len(buf), i + len(sig)); buf[i:e] += sig[:e - i]
+BANK.update({"rimshot": s_rimshot, "scratch": s_scratch, "key": s_key, "typing": s_typing, "error": s_error})
+GAIN.update({"rimshot": 0.9, "typing": 0.7})
+
 sfx = np.zeros(N)
 for c in CUES:
     s = BANK[c["n"]]() * GAIN.get(c["n"], 0.85) * c.get("g", 1)

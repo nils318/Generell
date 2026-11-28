@@ -15,6 +15,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 | 6 | Autoreifen | Profil (Aquaplaning) |
 | 7 | Rolltreppe | Seitenbürsten |
 | 8 | Jeans | Nieten an den Taschen |
+| 9 | Tastatur | Huckel auf F und J (3D) |
 
 ## Nächste Kandidaten (nach Stärke sortiert)
 
@@ -52,7 +53,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
   Sehr dramatische Bilder möglich (Gewitter).
 - **Status:** **noch nicht geprüft** (aus dem Gedächtnis), Daten vor Produktion belegen.
 
-### 6. Tastatur ohne Huckel auf F und J
+### 6. Tastatur ohne Huckel auf F und J — **umgesetzt als #9**
 - **Hook:** „Feel the bumps on F and J?“
 - **Kern:** Sie markieren die Grundreihe fürs Zehnfingersystem, damit man blind tippen kann.
 - **Status:** Zweck geprüft. Erfinderin und Jahr (June Botich, 2002?) sind in den Quellen widersprüchlich, also weglassen
