@@ -7,7 +7,7 @@ let TL, T, SHOTS, SUBS, SFX, MUSIC, EP;
 
 const C = n => { const l = TL.lines.find(l => l.cue === n); if (!l) throw new Error('no cue ' + n); return l; };
 const WF = (cue, w, nth = 0) => {
-  const m = C(cue).words.filter(x => x.w.toLowerCase().replace(/[^a-z0-9']/g, '') === w.toLowerCase());
+  const m = C(cue).words.filter(x => x.w.toLowerCase().replace(/[^\p{L}\p{N}']/gu, '') === w.toLowerCase());
   if (!m[nth]) throw new Error(`word ${w} not in ${cue}`); return m[nth].s;
 };
 function mouthAt(t) { const f = t * TL.fps, i = Math.floor(f); return lerp(TL.mouth[i] || 0, TL.mouth[i + 1] || 0, f - i); }
@@ -142,10 +142,13 @@ function outroShot() {
 }
 
 // ---------------------------------------------------------------- build
+let KW = {};
 function build() {
   EP = window.EPISODE;
   // series-standard markers; the episode adds its own
-  T = { intro: C('intro').s - 0.12, del: WF('delete', 'deleting') - 0.05, outro: C('outro').s - 0.15, end: TL.duration };
+  // series keywords; non-English episodes override them via EPISODE.keywords
+  KW = Object.assign({ quix: 'quix', today: 'today', deleting: 'deleting' }, EP.keywords || {});
+  T = { intro: C('intro').s - 0.12, del: WF('delete', KW.deleting) - 0.05, outro: C('outro').s - 0.15, end: TL.duration };
   const out = EP.build({ T });
   SHOTS = out.shots.map(s => s === 'INTRO' ? introShot() : s === 'OUTRO' ? outroShot() : s);
   // subtitle pages: <=3 words / 18 chars, break after punctuation
@@ -161,7 +164,7 @@ function build() {
     });
     flush();
   }
-  const std = [['whoosh', T.intro], ['pop', WF('intro', 'quix') - 0.1], ['charge', WF('delete', 'today') - 0.1],
+  const std = [['whoosh', T.intro], ['pop', WF('intro', KW.quix) - 0.1], ['charge', WF('delete', KW.today) - 0.1],
     ['zap', T.del], ['whoosh', T.outro], ['pop', C('outro').e + 0.05]];
   SFX = [...std, ...out.sfx].map(([n, t, g]) => ({ n, t: +t.toFixed(3), g: g ?? 1 })).sort((a, b) => a.t - b.t);
   MUSIC = Object.assign({ drops: [], radio: [] }, out.music || {});

@@ -1,0 +1,27 @@
+{
+ "tts": "edge",
+ "voice": "de-DE-ChristophNeural",
+ "rate": "+14%",
+ "music": false,
+ "lines": [
+  ["preview", "Ich hab hallo getippt, und da steht [js;;p|J, S, Semikolon, Semikolon, P].", 0.15, {"pitch": "+8Hz"}],
+  ["previewb", "Alter, what the fuck?!", 0.45, {"pitch": "+28Hz", "rate": "+0%", "volume": "+30%", "gain": 3}],
+  ["hook", "Leg mal deine Finger auf die Tastatur. Spürst du die kleinen Huckel auf F und J?", 0.2, {"pitch": "+6Hz"}],
+  ["reveal", "Die sind nicht ohne Grund da.", 0.1, {"pitch": "-4Hz"}],
+  ["roasta", "Und nein, das ist kein Fabrikfehler, du Genie.", 0.55, {"pre": 0.4, "pitch": "+22Hz", "rate": "+2%", "volume": "+25%", "gain": 3}],
+  ["intro", "Ich bin Quix.", 0.1, {"pitch": "+12Hz"}],
+  ["delete", "Und heute... lösche ich sie! Alle beide!", 0.4, {"pitch": "+20Hz", "volume": "+20%"}],
+  ["blind", "Jetzt tipp mal blind. Deine Hände landen eine Taste zu weit rechts.", 0.2, {"pitch": "+4Hz"}],
+  ["gibberish", "Du wolltest hallo schreiben. Rausgekommen ist [js;;p|J, S, Semikolon, Semikolon, P].", 0.15, {"pitch": "+10Hz"}],
+  ["roastb", "Glückwunsch. Du tippst jetzt wie eine verwirrte Taube.", 0.55, {"pre": 0.45, "pitch": "+22Hz", "rate": "+0%", "volume": "+25%", "gain": 3}],
+  ["why", "Die Huckel markieren die Grundreihe. Dein linker Zeigefinger kommt aufs F, dein rechter aufs J.", 0.2, {"pitch": "+2Hz"}],
+  ["home", "Von da aus weiß jeder Finger genau, wo seine Tasten sind. Das nennt man Zehnfingersystem.", 0.2, {"pitch": "+8Hz"}],
+  ["fast", "So tippen Leute richtig schnell, ohne ein einziges Mal runterzuschauen.", 0.1, {"pitch": "+4Hz", "rate": "+18%"}],
+  ["roastc", "Und du? Du suchst das Q, als würde es dir Geld schulden.", 0.55, {"pre": 0.4, "pitch": "+22Hz", "rate": "+4%", "volume": "+25%", "gain": 3}],
+  ["numpad", "Und es gibt noch einen. Die Fünf im Ziffernblock hat auch einen Huckel, damit deine Finger die Mitte finden.", 0.25, {"pitch": "+4Hz"}],
+  ["roastd", "Also, falls du dein ganzes Leben mit zwei Fingern getippt hast... ich bin nicht sauer.", 0.25, {"pre": 0.3, "pitch": "+8Hz", "rate": "+6%"}],
+  ["roastd2", "Nur enttäuscht.", 0.6, {"pre": 0.35, "pitch": "-14Hz", "rate": "-18%", "gain": 2}],
+  ["last", "Die Huckel sind winzig. Aber sie machen dich schnell. Fühl sie. Jetzt.", 0.35, {"pitch": "+8Hz"}],
+  ["outro", "Also... was soll ich als Nächstes löschen?", 1.2, {"pitch": "+16Hz", "volume": "+15%"}]
+ ]
+}
