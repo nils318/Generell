@@ -11,12 +11,17 @@
 | #7 | What if escalators had no side brushes? (Rolltreppe) | `ep07_escalator/WhatIf_07_Escalator_Brushes.mp4` (65 s) |
 | #8 | What if jeans had no rivets? (Levi Strauss, 1873) | `ep08_jeans/WhatIf_08_Jeans_Rivets.mp4` (70 s) |
 | #9 | What if keyboards had no bumps? (F/J, **erste 3D-Folge**) | `ep09_keyboard/WhatIf_09_Keyboard_Bumps.mp4` (65 s) |
+| #10 DE | Was wäre ohne die Huckel? (deutsche Fassung, 2D-Quix in 3D) | `ep10_tastatur_de/WasWaere_10_Tastatur_Huckel_DE.mp4` (76 s) |
+| Geschichte DE | Keine Sklaven?! Wie die Pyramiden gebaut wurden (Quix als Pharao/Historiker) | `ep11_pyramiden/Quix_Pyramiden_DE.mp4` (88 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
 **Format ab #7:** Jede Folge beginnt mit einer Vorschau (dem lustigsten Moment, mit „PREVIEW“-Label), danach kommt das Thema.
 Tempo 1,18, mindestens 60 Sekunden. Quix hat eigene Sprüche, die witzig sind und dabei etwas erklären.
 **Pointen ab #9:** eigene Zeile mit `pre` (Pause davor), langsamer, höher, `k` 1,9 und `gain` +3 dB, danach Rimshot oder Plattenkratzer.
+**Deutsch ab #10:** `engine/voice_edge.py` (Edge TTS, Wort-Zeitstempel aus WordBoundary, pro Zeile `rate`/`pitch`/`volume`, `pre`, `gain`).
+Stimme: `fr-FR-RemyMultilingualNeural` (spricht Deutsch, klingt natürlicher als `de-DE-ChristophNeural`). Braucht den Host `speech.platform.bing.com`.
+**Kostüme (2D-Quix):** `outfit: 'pharaoh'` (Nemes, Bart, Kragen) oder `'historian'` (Tropenhelm, Brille), `item: 'jug' | 'pointer'`.
 **3D ab #9:** `engine/web/q3d.js` (three.js r150, Toon-Look mit Konturen, 3D-Quix). Untertitel und Labels bleiben 2D darüber.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
@@ -89,5 +94,10 @@ und Levi Strauss & Co. Davis konnte die Patentgebühr nicht zahlen, Strauss (sei
 ([Google Patents](https://patents.google.com/patent/US139121), [History.com](https://www.history.com/this-day-in-history/may-20/levi-strauss-and-jacob-davis-receive-patent-for-blue-jeans)).
 **#9** Die Huckel auf F und J markieren die Grundreihe fürs Zehnfingersystem: linker Zeigefinger auf F, rechter auf J.
 Die 5 im Ziffernblock hat ebenfalls einen Huckel ([PCWorld](https://www.pcworld.com/article/2337532/this-is-why-the-f-and-j-keys-on-keyboards-are-usually-raised.html)).
+**Pyramiden** Bauarbeiter waren keine Sklaven: Ehrengräber neben den Pyramiden mit Brot und Bier, eigene Arbeiterstadt (Hawass, Lehner).
+Die Arbeit war aber teils verpflichtend und lief in wechselnden Schichten ([CBC](https://www.cbc.ca/technology/story/2010/01/11/tech-egypt-pyramid.html), [Harvard Magazine](https://www.harvardmagazine.com/2003/07/who-built-the-pyramids.html)).
+Team-Graffiti „Freunde des Cheops“, „Trunkenbolde des Mykerinos“ (Lehner). Nasser Sand halbiert die Zugkraft (Uni Amsterdam 2014, Hypothese mit Laborbeleg,
+[Live Science](https://www.livescience.com/45285-how-egyptians-moved-pyramid-stones.html)). ca. 2,3 Mio. Blöcke, ca. 6 Mio. t, weiße Tura-Kalksteinverkleidung,
+über 3.800 Jahre höchstes Bauwerk ([Wikipedia](https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza)). Bauzeit je nach Quelle ca. 20–27 Jahre.
 
 Schriften: Bungee & Lilita One (SIL Open Font License). 3D: three.js (MIT, `engine/web/vendor/THREE_LICENSE`). Musik und Soundeffekte sind komplett synthetisiert.

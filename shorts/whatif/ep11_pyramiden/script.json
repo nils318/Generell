@@ -1,0 +1,26 @@
+{
+ "tts": "edge",
+ "voice": "fr-FR-RemyMultilingualNeural",
+ "rate": "+12%",
+ "music": false,
+ "lines": [
+  ["hook", "Stopp! Die Pyramiden wurden nicht von Sklaven gebaut.", 0.2, {"pitch": "+12Hz", "volume": "+25%", "gain": 3}],
+  ["hook2", "Sondern von Typen, die mit Brot und Bier bezahlt wurden.", 0.4, {"pitch": "+6Hz"}],
+  ["intro", "Ich bin Quix. Heute: Historiker. Und ein kleines bisschen Pharao.", 0.3, {"pitch": "+8Hz"}],
+  ["scale", "Die Cheops-Pyramide besteht aus rund [2,3|zwei Komma drei] Millionen Steinblöcken. Zusammen fast sechs Millionen Tonnen.", 0.2],
+  ["record", "Gebaut in über zwanzig Jahren. Danach war sie über [3800|dreitausendachthundert] Jahre lang das höchste Bauwerk der Welt.", 0.15, {"pitch": "+4Hz"}],
+  ["roast1", "[3800|Dreitausendachthundert] Jahre. Dein Handy hält nicht mal zwei.", 0.55, {"pre": 0.35, "pitch": "+14Hz", "rate": "+2%", "volume": "+25%", "gain": 3}],
+  ["workers", "Gebaut haben sie Arbeiter in Teams, die sich abgewechselt haben. Sie wohnten in einer eigenen Stadt direkt neben der Baustelle.", 0.2],
+  ["tombs", "Und sie wurden mit Ehre neben den Pyramiden begraben. Mit Brot und Bier fürs Jenseits.", 0.25, {"pitch": "+4Hz"}],
+  ["gangs", "Die Teams hatten sogar Namen. Zum Beispiel: Die Freunde des Cheops.", 0.2, {"pitch": "+6Hz"}],
+  ["gangs2", "Oder, kein Witz: Die Trunkenbolde des Mykerinos.", 0.4, {"pre": 0.3, "pitch": "+12Hz", "volume": "+20%", "gain": 2}],
+  ["roast2", "Klingt wie deine WhatsApp-Gruppe.", 0.55, {"pre": 0.3, "pitch": "+14Hz", "rate": "+0%", "volume": "+25%", "gain": 3}],
+  ["move", "Aber wie zieht man einen Block, der so schwer ist wie zwei Autos?", 0.2, {"pitch": "+8Hz"}],
+  ["sled", "Auf einem Holzschlitten. Und mit einem Trick: Einer kippt Wasser vor den Schlitten in den Sand.", 0.2],
+  ["water", "Nasser Sand halbiert die Kraft, die man zum Ziehen braucht. Das haben Physiker [2014|zweitausendvierzehn] im Labor getestet.", 0.15],
+  ["roast3", "Die Ägypter konnten Physik also schon besser als du in deiner letzten Klausur.", 0.55, {"pre": 0.35, "pitch": "+14Hz", "rate": "+2%", "volume": "+25%", "gain": 3}],
+  ["white", "Und die Pyramiden waren nicht sandfarben. Sie waren mit weißem, poliertem Kalkstein verkleidet und haben in der Sonne geglänzt.", 0.3, {"pitch": "+4Hz"}],
+  ["cleo", "Und jetzt der Hammer: Kleopatra lebte näher an der Mondlandung als am Bau der großen Pyramide.", 0.5, {"pitch": "+10Hz", "volume": "+15%", "gain": 2}],
+  ["outro", "Also... welches Geheimnis der Geschichte soll ich als Nächstes knacken?", 1.2, {"pitch": "+10Hz", "volume": "+15%"}]
+ ]
+}

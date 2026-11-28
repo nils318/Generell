@@ -148,7 +148,8 @@ function build() {
   // series-standard markers; the episode adds its own
   // series keywords; non-English episodes override them via EPISODE.keywords
   KW = Object.assign({ quix: 'quix', today: 'today', deleting: 'deleting' }, EP.keywords || {});
-  T = { intro: C('intro').s - 0.12, del: WF('delete', KW.deleting) - 0.05, outro: C('outro').s - 0.15, end: TL.duration };
+  const hasDel = TL.lines.some(l => l.cue === 'delete');   // non-'delete' formats (e.g. history explainers) skip it
+  T = { intro: C('intro').s - 0.12, del: hasDel ? WF('delete', KW.deleting) - 0.05 : -99, outro: C('outro').s - 0.15, end: TL.duration };
   const out = EP.build({ T });
   SHOTS = out.shots.map(s => s === 'INTRO' ? introShot() : s === 'OUTRO' ? outroShot() : s);
   // subtitle pages: <=3 words / 18 chars, break after punctuation
@@ -164,11 +165,11 @@ function build() {
     });
     flush();
   }
-  const std = [['whoosh', T.intro], ['pop', WF('intro', KW.quix) - 0.1], ['charge', WF('delete', KW.today) - 0.1],
-    ['zap', T.del], ['whoosh', T.outro], ['pop', C('outro').e + 0.05]];
+  const std = [['whoosh', T.intro], ['pop', WF('intro', KW.quix) - 0.1], ['whoosh', T.outro], ['pop', C('outro').e + 0.05],
+    ...(hasDel ? [['charge', WF('delete', KW.today) - 0.1], ['zap', T.del]] : [])];
   SFX = [...std, ...out.sfx].map(([n, t, g]) => ({ n, t: +t.toFixed(3), g: g ?? 1 })).sort((a, b) => a.t - b.t);
   MUSIC = Object.assign({ drops: [], radio: [] }, out.music || {});
-  MUSIC.drops = [[T.del - 0.02, T.del + 1.1, 0.85], ...MUSIC.drops];
+  if (hasDel) MUSIC.drops = [[T.del - 0.02, T.del + 1.1, 0.85], ...MUSIC.drops];
 }
 
 // ---------------------------------------------------------------- overlays
@@ -203,9 +204,18 @@ function drawBadge(t) {
   const shot = SHOTS.find(s => t >= s.a && t < s.b);
   if (!shot || shot.noBadge || ['intro', 'outro'].includes(shot.name)) return;
   ctx.save();
-  pill(ctx, 205, 190, 290, 76, 'rgba(26,16,51,0.85)', '#FFD43B', 5);
-  txt(ctx, 'WHAT IF?', 180, 194, { size: 44, font: 'Bungee', color: '#FFD43B', shadow: false });
-  txt(ctx, EP.badge, 318, 194, { size: 40, font: 'Lilita', color: '#fff', shadow: false });
+  const series = EP.series || 'WHAT IF?';
+  if (series === 'WHAT IF?') {
+    pill(ctx, 205, 190, 290, 76, 'rgba(26,16,51,0.85)', '#FFD43B', 5);
+    txt(ctx, 'WHAT IF?', 180, 194, { size: 44, font: 'Bungee', color: '#FFD43B', shadow: false });
+    txt(ctx, EP.badge, 318, 194, { size: 40, font: 'Lilita', color: '#fff', shadow: false });
+  } else {                                   // other series: "<SERIES> · <badge>", width from text
+    ctx.font = '44px Bungee'; const w1 = ctx.measureText(series).width; ctx.font = '40px Lilita'; const w2 = ctx.measureText(EP.badge).width;
+    const w = w1 + w2 + 90, x0 = 60;
+    pill(ctx, x0 + w / 2, 190, w, 76, 'rgba(26,16,51,0.85)', '#FFD43B', 5);
+    txt(ctx, series, x0 + 30, 194, { size: 44, font: 'Bungee', color: '#FFD43B', shadow: false, align: 'left' });
+    txt(ctx, EP.badge, x0 + 60 + w1, 194, { size: 40, font: 'Lilita', color: '#fff', shadow: false, align: 'left' });
+  }
   ctx.restore();
 }
 

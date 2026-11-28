@@ -381,6 +381,85 @@ function mixPose(a, b, t) {
     o: x,y (ground), s scale, t time, mouth 0..1, expr, look [x,y], blink,
        pose (name or mixed object), lean (rad), squash (1 = none), glow, morph,
        antAngle, tint {color, a}, wig, match (flame 0..1 or null), sweat 0..1, shadow */
+
+// ---- costume props: outfit 'pharaoh' (nemes, beard, collar) / 'historian' (pith helmet, glasses); item 'jug' | 'pointer'
+function nemesBack(ctx) {   // side flaps hanging behind the shoulders
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  for (const sd of [-1, 1]) {
+    ctx.beginPath(); ctx.moveTo(150 * sd, -360); ctx.quadraticCurveTo(205 * sd, -250, 180 * sd, -150); ctx.lineTo(120 * sd, -170); ctx.lineTo(120 * sd, -330); ctx.closePath();
+    ctx.fillStyle = '#2B5FD9'; ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+}
+function stripes(ctx, path, x0, x1, y0, y1, step) {
+  ctx.save(); ctx.clip(path); ctx.fillStyle = '#FFD43B';
+  for (let y = y0; y < y1; y += step * 2) ctx.fillRect(x0, y, x1 - x0, step);
+  ctx.restore();
+}
+function nemesFront(ctx) {
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  const cap = new Path2D();
+  cap.moveTo(-150, -340); cap.bezierCurveTo(-160, -430, -90, -486, 0, -488); cap.bezierCurveTo(90, -486, 160, -430, 150, -340);
+  cap.lineTo(118, -372); cap.quadraticCurveTo(0, -398, -118, -372); cap.closePath();
+  ctx.fillStyle = '#2B5FD9'; ctx.fill(cap); stripes(ctx, cap, -170, 170, -500, -330, 14); ctx.stroke(cap);
+  for (const sd of [-1, 1]) {   // lappets in front of the shoulders
+    const l = new Path2D(); l.moveTo(118 * sd, -372); l.lineTo(150 * sd, -340); l.lineTo(146 * sd, -190); l.lineTo(104 * sd, -190); l.lineTo(108 * sd, -350); l.closePath();
+    ctx.fillStyle = '#2B5FD9'; ctx.fill(l); stripes(ctx, l, 90 * sd - 60, 90 * sd + 80, -380, -180, 13); ctx.stroke(l);
+  }
+  ctx.fillStyle = '#FFD43B'; ctx.beginPath(); ctx.moveTo(-122, -376); ctx.quadraticCurveTo(0, -404, 122, -376); ctx.lineTo(118, -360); ctx.quadraticCurveTo(0, -386, -118, -360); ctx.closePath(); ctx.fill(); ctx.stroke();
+  // uraeus cobra
+  ctx.fillStyle = '#F2B705'; ctx.beginPath(); ctx.moveTo(-12, -392); ctx.quadraticCurveTo(-26, -440, 0, -452); ctx.quadraticCurveTo(26, -440, 12, -392); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = Q.ink; ctx.beginPath(); ctx.arc(0, -432, 4, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function pharaohBeard(ctx) {
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 7;
+  const b = new Path2D(); b.moveTo(-20, -212); b.lineTo(20, -212); b.lineTo(16, -132); b.quadraticCurveTo(0, -118, -16, -132); b.closePath();
+  ctx.fillStyle = '#2B5FD9'; ctx.fill(b); stripes(ctx, b, -30, 30, -212, -120, 10); ctx.stroke(b);
+  ctx.restore();
+}
+function pharaohCollar(ctx) {
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  const cols = ['#FFD43B', '#2BD47D', '#2B5FD9', '#FF5A5A', '#FFD43B'];
+  for (let i = cols.length - 1; i >= 0; i--) {
+    const r = 60 + i * 18; ctx.fillStyle = cols[i];
+    ctx.beginPath(); ctx.ellipse(0, -205, 150 + i * 6, r, 0, 0, Math.PI); ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+}
+function pithHelmet(ctx) {
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  ctx.fillStyle = '#D9C08A'; ctx.beginPath(); ctx.ellipse(0, -372, 205, 34, 0, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-128, -378); ctx.bezierCurveTo(-130, -470, -70, -505, 0, -506); ctx.bezierCurveTo(70, -505, 130, -470, 128, -378); ctx.closePath();
+  ctx.fillStyle = '#E8D3A2'; ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#8A6A3A'; ctx.beginPath(); ctx.moveTo(-128, -400); ctx.lineTo(128, -400); ctx.lineTo(128, -380); ctx.lineTo(-128, -380); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#D9C08A'; ctx.beginPath(); ctx.arc(0, -506, 12, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.25)'; ctx.beginPath(); ctx.ellipse(-55, -460, 22, 30, 0.3, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function glasses(ctx) {
+  ctx.save(); ctx.strokeStyle = '#3A2A1A'; ctx.lineWidth = 9;
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.arc(58 * sd, -305, 50, 0, 7); ctx.fillStyle = 'rgba(200,240,255,0.18)'; ctx.fill(); ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(-10, -312); ctx.quadraticCurveTo(0, -322, 10, -312); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,0.7)'; ctx.lineWidth = 6;
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.arc(58 * sd, -305, 36, 3.6, 4.4); ctx.stroke(); }
+  ctx.restore();
+}
+function heldItem(ctx, kind, x, y, t) {
+  ctx.save(); ctx.translate(x, y); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  if (kind === 'jug') {     // clay beer jug
+    ctx.translate(0, -40);
+    ctx.fillStyle = '#C8743A'; ctx.beginPath(); ctx.moveTo(-34, -70); ctx.lineTo(34, -70); ctx.quadraticCurveTo(70, -20, 50, 40); ctx.quadraticCurveTo(0, 70, -50, 40); ctx.quadraticCurveTo(-70, -20, -34, -70); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#FFF4D6'; ctx.beginPath(); ctx.ellipse(0, -72, 40, 16, 0, 0, 7); ctx.fill(); ctx.stroke();
+    for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(-20 + i * 20, -84 - 6 * Math.sin(t * 6 + i), 12, 0, 7); ctx.fill(); ctx.stroke(); }
+    ctx.strokeStyle = '#8A4A20'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-44, 0); ctx.lineTo(44, 0); ctx.stroke();
+  } else if (kind === 'pointer') {
+    ctx.rotate(-0.9); ctx.fillStyle = '#8A5A2B'; ctx.beginPath(); ctx.roundRect(-8, -230, 16, 240, 8); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#FFD43B'; ctx.beginPath(); ctx.arc(0, -232, 14, 0, 7); ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+}
+
 function drawQuix(ctx, o) {
   const t = o.t || 0, E = EXPR[o.expr || 'cool'];
   const breathe = 1 + 0.014 * Math.sin(t * 2.6);
@@ -409,6 +488,7 @@ function drawQuix(ctx, o) {
   ctx.scale(1 / Math.sqrt(sq), sq);
   ctx.translate(0, 60);
   if (o.wig) drawWig(ctx, true);
+  if (o.outfit === 'pharaoh') nemesBack(ctx);
   scarfTails(ctx, t, o.wind);
   const tip = drawAntenna(ctx, o);
   // body fill
@@ -433,10 +513,13 @@ function drawQuix(ctx, o) {
   ctx.strokeStyle = Q.ink; ctx.lineWidth = 10; ctx.lineJoin = 'round'; ctx.stroke(BODY);
   if (o.wig) drawWig(ctx, false);
   if (o.hat === 'fedora') drawFedora(ctx);
-  drawScarf(ctx, t);
+  if (o.outfit === 'historian') pithHelmet(ctx);
+  if (o.outfit === 'pharaoh') { nemesFront(ctx); pharaohCollar(ctx); } else drawScarf(ctx, t);
   drawEye(ctx, -58, -305, -1, o, E);
   drawEye(ctx, 58, -305, 1, o, E);
   drawMouth(ctx, o, E);
+  if (o.outfit === 'pharaoh') pharaohBeard(ctx);
+  if (o.outfit === 'historian' || o.glasses) glasses(ctx);
   if (o.tears) drawTears(ctx, t, o.tears);
   if (o.sweat) sweatDrop(ctx, 150, -330, o.sweat);
   // arms
@@ -444,6 +527,7 @@ function drawQuix(ctx, o) {
     const p = pose[sd], sx = sd === 'L' ? -132 : 132;
     drawArm(ctx, sx, -150, p[0], p[1], p[2], p[3], p[4]);
   }
+  if (o.item) { const p = pose.R; heldItem(ctx, o.item, p[0], p[1], t); }
   if (o.match != null) {
     const p = pose.R;
     drawMatch(ctx, p[0] + 10, p[1] - 6, o.match, t);
