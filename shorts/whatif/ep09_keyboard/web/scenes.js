@@ -60,8 +60,8 @@ function buildWorld() {
   for (const [ch, x, z, w] of PAD) W3.pad[ch] = makeKey(ch, x * U, z * U, w || 1);
   W3.bumps.F = makeBump(W3.keys.F); W3.bumps.J = makeBump(W3.keys.J); W3.bumps[5] = makeBump(W3.pad[5]);
   // monitor
-  const stand = Q3.ink(new THREE.BoxGeometry(0.5, 2.2, 0.3), Q3.toon(0x3A3D5C), 0.03); stand.position.set(0.9, 1.1, -4.2); S.add(stand);
-  const foot = Q3.ink(new THREE.BoxGeometry(2.2, 0.12, 1.2), Q3.toon(0x3A3D5C), 0.03); foot.position.set(0.9, 0.06, -4.2); S.add(foot);
+  const stand = Q3.ink(new THREE.BoxGeometry(0.5, 2.2, 0.3), Q3.toon(0x3A3D5C), 0.03); stand.position.set(0.9, 1.1, -4.62); S.add(stand);
+  const foot = Q3.ink(new THREE.BoxGeometry(2.2, 0.12, 1.2), Q3.toon(0x3A3D5C), 0.03); foot.position.set(0.9, 0.06, -4.5); S.add(foot);
   const mon = Q3.ink(new THREE.BoxGeometry(6.4, 3.8, 0.3), Q3.toon(0x2A2D45), 0.04); mon.position.set(0.9, 3.6, -4.3); S.add(mon);
   SCREEN = Q3.textTex(1024, 600, drawScreen);
   const scr = new THREE.Mesh(new THREE.PlaneGeometry(6.0, 3.45), new THREE.MeshBasicMaterial({ map: SCREEN.tex })); scr.position.set(0.9, 3.6, -4.14); S.add(scr);
@@ -81,14 +81,17 @@ function drawScreen(g, w, h) {
   g.fillStyle = '#7B5CFF'; g.fillRect(0, 0, w, 70);
   g.fillStyle = '#fff'; g.font = '40px Lilita'; g.textBaseline = 'middle'; g.fillText(SCR.title, 30, 36);
   for (let i = 0; i < 3; i++) { g.fillStyle = ['#FF5A5A', '#FFD43B', '#2BD47D'][i]; g.beginPath(); g.arc(w - 40 - i * 44, 36, 14, 0, 7); g.fill(); }
-  g.font = '92px Bungee'; g.textBaseline = 'alphabetic';
-  const lines = SCR.text.split('\n'); let y = 200;
+  const lines = SCR.text.split('\n'), big = lines.length === 1;
+  g.font = big ? '150px Bungee' : '70px Bungee'; g.textBaseline = 'alphabetic'; g.textAlign = 'center';
+  const lh = big ? 0 : 100; let y = big ? 370 : 290 - (lines.length - 1) * lh / 2;
   for (const ln of lines) {
-    g.fillStyle = SCR.bad ? '#E0284A' : '#1A1033'; g.fillText(ln, 40, y);
-    if (SCR.bad && ln) { const tw = g.measureText(ln).width; g.strokeStyle = '#E0284A'; g.lineWidth = 6; g.beginPath(); for (let x = 40; x < 40 + tw; x += 24) { g.moveTo(x, y + 18); g.lineTo(x + 12, y + 30); g.lineTo(x + 24, y + 18); } g.stroke(); }
-    y += 120;
+    const tw = g.measureText(ln).width, x0 = w / 2 - tw / 2;
+    g.fillStyle = SCR.bad ? '#E0284A' : '#1A1033'; g.fillText(ln, w / 2, y);
+    if (SCR.bad && ln) { g.strokeStyle = '#E0284A'; g.lineWidth = 8; g.beginPath(); for (let x = x0; x < x0 + tw; x += 30) { g.moveTo(x, y + 24); g.lineTo(x + 15, y + 40); g.lineTo(x + 30, y + 24); } g.stroke(); }
+    y += lh;
   }
-  if (SCR.cursor) { const last = lines[lines.length - 1]; g.fillStyle = '#1A1033'; g.fillRect(48 + g.measureText(last).width, y - 120 - 78, 10, 90); }
+  if (SCR.cursor) { const last = lines[lines.length - 1], cw = g.measureText(last).width; g.fillStyle = '#1A1033'; g.fillRect(w / 2 + cw / 2 + 10, y - lh - (big ? 120 : 62), big ? 14 : 9, big ? 130 : 72); }
+  g.textAlign = 'left';
 }
 function setScreen(text, bad = false, cursor = true, title = 'notes.txt') {
   const k = text + '|' + bad + cursor + title; if (k === SCR.key) return;
