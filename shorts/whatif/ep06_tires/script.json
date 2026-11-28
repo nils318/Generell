@@ -1,0 +1,25 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.18,
+ "expr": 1.4,
+ "music": false,
+ "lines": [
+  ["hook", "Look at your car tires. See those deep grooves in the rubber?", 0.2, {"pitch": 0.5}],
+  ["reveal", "That pattern is called the tread. And it's doing a lot more than you think.", 0.25],
+  ["intro", "I'm Quix.", 0.1, {"pitch": 1}],
+  ["delete", "And today... I'm deleting it! Every single groove!", 0.4, {"pitch": 1.5, "k": 1.5}],
+  ["roast", "Look at that. A bald, round, sad rubber donut. Nobody wants you, tire.", 0.35, {"pitch": 1, "k": 1.6, "speed": 1.12}],
+  ["roast2", "And you're not even a tire anymore. You're a hockey puck with ambitions.", 0.3, {"pitch": 1.5, "k": 1.5}],
+  ["rain", "Now it starts to rain. And the car rolls onto a puddle.", 0.25],
+  ["wedge", "Normally the grooves drain the water out from under the tire. Now there's nowhere for it to go.", 0.25],
+  ["float", "So the water pushes the tire up like a wedge. Aquaplaning! The car can't steer or brake.", 0.3, {"pitch": 1, "k": 1.5}],
+  ["ice", "At that point, your car is sliding on a sheet of water. Like an ice rink, but on wheels.", 0.3],
+  ["numbers", "A new tire pushes away about thirty liters of water every second at eighty kilometers per hour.", 0.2],
+  ["yes", "Yes. Thirty liters. Every second.", 0.35, {"pitch": 1, "k": 1.5}],
+  ["min", "In most EU countries, the legal minimum tread is one point six millimeters.", 0.25],
+  ["twist", "Formula One slicks have no tread at all, until it rains. Then they switch to grooved tires.", 0.3, {"pitch": 0.5}],
+  ["teams", "And Formula One teams change tires for exactly this reason, every time the track gets wet.", 0.35],
+  ["check", "So check your tread. Your whole car is literally standing on it.", 0.35, {"pitch": 0.5}],
+  ["outro", "So... what should I delete next?", 1.2, {"pitch": 1, "k": 1.5}]
+ ]
+}

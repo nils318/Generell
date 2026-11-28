@@ -12,10 +12,11 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 | 3 | Flugzeugfenster | Atmungsloch (Breather Hole) |
 | 4 | Münzen | Rillen am Rand (Reeding) |
 | 5 | Mikrowelle | Metallgitter in der Tür |
+| 6 | Autoreifen | Profil (Aquaplaning) |
 
 ## Nächste Kandidaten (nach Stärke sortiert)
 
-### 1. Autoreifen ohne Profil ⭐ (Assets aus #2 wiederverwendbar)
+### 1. Autoreifen ohne Profil ⭐ — **umgesetzt als #6**
 - **Hook:** „What if tires had no tread?“
 - **Kern:** Das Profil leitet Wasser aus der Kontaktfläche. Ohne Profil schwimmt der Reifen auf einem Wasserkeil auf (Aquaplaning).
   Neue Reifen verdrängen laut Continental bis zu ca. 30 Liter Wasser pro Sekunde bei 80 km/h. Mindestprofil in den meisten

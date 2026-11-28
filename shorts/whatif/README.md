@@ -7,6 +7,7 @@
 | #3 | What if plane windows had no tiny hole? (Atmungsloch) | `ep03_plane/WhatIf_03_Plane_Window.mp4` (46 s) |
 | #4 | What if coins had no ridges? (Reeding, Isaac Newton) | `ep04_coins/WhatIf_04_Coin_Ridges.mp4` (57 s) |
 | #5 | What if microwaves had no metal mesh? (Türgitter) | `ep05_microwave/WhatIf_05_Microwave_Mesh.mp4` (56 s) |
+| #6 | What if tires had no tread? (Aquaplaning) | `ep06_tires/WhatIf_06_Tire_Tread.mp4` (64 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
@@ -67,5 +68,9 @@ Isaac Newton wurde 1696 Warden der Royal Mint und verfolgte Fälscher. Heute hel
 Licht kommt durch. WLAN funkt auf 2,4 GHz. 1945 schmolz Percy Spencer ein Süßigkeitenriegel in der Tasche (welcher, ist
 umstritten). Der Radarange von 1947 war fast 1,8 m hoch
 ([IEEE Spectrum](https://spectrum.ieee.org/a-history-of-the-microwave-oven), [Wikipedia: Percy Spencer](https://en.wikipedia.org/wiki/Percy_Spencer)).
+
+**#6** Profil leitet Wasser aus der Kontaktfläche. Neue Reifen verdrängen laut Continental bis ca. 30 Liter Wasser pro Sekunde bei 80 km/h
+([Continental: Aquaplaning](https://continental-tires.com/ca/en/b2c/tire-knowledge/aquaplaning)). Mindestprofil in den meisten EU-Ländern: 1,6 mm.
+F1-Slicks haben kein Profil, bis es regnet. Herstellerangaben, nicht unabhängig getestet.
 
 Schriften: Bungee & Lilita One (SIL Open Font License). Musik und Soundeffekte sind komplett synthetisiert.
