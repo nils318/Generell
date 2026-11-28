@@ -14,6 +14,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 | 5 | Mikrowelle | Metallgitter in der Tür |
 | 6 | Autoreifen | Profil (Aquaplaning) |
 | 7 | Rolltreppe | Seitenbürsten |
+| 8 | Jeans | Nieten an den Taschen |
 
 ## Nächste Kandidaten (nach Stärke sortiert)
 
@@ -25,7 +26,7 @@ Gute Themen haben: (1) ein Teil, das jeder kennt, aber keiner beachtet, (2) eine
 - **Status:** geprüft (Herstellerangaben, nicht unabhängig getestet).
 - **Quelle:** [Continental – Aquaplaning](https://continental-tires.com/ca/en/b2c/tire-knowledge/aquaplaning)
 
-### 2. Jeans ohne Nieten ⭐
+### 2. Jeans ohne Nieten ⭐ — **umgesetzt als #8**
 - **Hook:** „Why do jeans have tiny metal studs?“
 - **Kern:** Die Kupfernieten sichern die Taschenecken, damit die Naht nicht reißt (für Minenarbeiter). US-Patent 139,121
   vom 20. Mai 1873 für Jacob Davis und Levi Strauss. Davis hatte kein Geld für das Patent, also zahlte Strauss.

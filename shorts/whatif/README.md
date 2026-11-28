@@ -9,11 +9,12 @@
 | #5 | What if microwaves had no metal mesh? (Türgitter) | `ep05_microwave/WhatIf_05_Microwave_Mesh.mp4` (56 s) |
 | #6 | What if tires had no tread? (Aquaplaning) | `ep06_tires/WhatIf_06_Tire_Tread.mp4` (64 s) |
 | #7 | What if escalators had no side brushes? (Rolltreppe) | `ep07_escalator/WhatIf_07_Escalator_Brushes.mp4` (65 s) |
+| #8 | What if jeans had no rivets? (Levi Strauss, 1873) | `ep08_jeans/WhatIf_08_Jeans_Rivets.mp4` (70 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
 **Format ab #7:** Jede Folge beginnt mit einer Vorschau (dem lustigsten Moment, mit „PREVIEW“-Label), danach kommt das Thema.
-Tempo 1,18, mindestens 60 Sekunden.
+Tempo 1,18, mindestens 60 Sekunden. Quix hat eigene Sprüche, die witzig sind und dabei etwas erklären.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
 (nur Stimme + Soundeffekte; wieder einschalten mit `"music": true` in `script.json`).
@@ -80,5 +81,8 @@ F1-Slicks haben kein Profil, bis es regnet. Herstellerangaben, nicht unabhängig
 **#7** Die Seitenbürsten halten Füße, Schnürsenkel und Kleidung vom Spalt zwischen Stufen und Seitenwand fern.
 Sie stoppen die Rolltreppe nicht, dafür ist der Not-Aus da ([KONE](https://www.kone.com.au/blogs/why-do-escalators-have-brushes.aspx),
 [Elevator World](https://elevatorworld.com/blog/the-true-purpose-of-escalator-brushes/)).
+**#8** Nieten sichern die Taschenecken, wo der Stoff am stärksten belastet wird. US-Patent 139,121 vom 20. Mai 1873 für Jacob W. Davis
+und Levi Strauss & Co. Davis konnte die Patentgebühr nicht zahlen, Strauss (sein Stofflieferant) übernahm sie
+([Google Patents](https://patents.google.com/patent/US139121), [History.com](https://www.history.com/this-day-in-history/may-20/levi-strauss-and-jacob-davis-receive-patent-for-blue-jeans)).
 
 Schriften: Bungee & Lilita One (SIL Open Font License). Musik und Soundeffekte sind komplett synthetisiert.

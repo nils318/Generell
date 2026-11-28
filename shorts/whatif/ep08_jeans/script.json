@@ -1,0 +1,26 @@
+{
+ "voice": "am_fenrir",
+ "speed": 1.18,
+ "expr": 1.4,
+ "music": false,
+ "lines": [
+  ["preview", "Oh, fuck! My pocket just ripped off. Again!", 0.5, {"pitch": 2, "k": 1.6}],
+  ["hook", "Look at your jeans. See those tiny metal dots on the pockets?", 0.2, {"pitch": 0.5}],
+  ["reveal", "Those are rivets. And no, they're not decoration, you little fashion goblin.", 0.25, {"k": 1.5}],
+  ["crowd", "Almost every pair of jeans on Earth has them. Including the ones you're wearing right now.", 0.25],
+  ["intro", "I'm Quix.", 0.1, {"pitch": 1}],
+  ["delete", "And today... I'm deleting them! Every single rivet!", 0.4, {"pitch": 1.5, "k": 1.5}],
+  ["rip", "Now you shove your phone in your pocket. Rrrip! The corner tears wide open.", 0.3, {"pitch": 1, "k": 1.5}],
+  ["roast1", "Congratulations. Your pants are now a skirt with commitment issues.", 0.35, {"pitch": 1, "k": 1.6, "speed": 1.12}],
+  ["why", "Pocket corners take the most stress. Every time you jam your hands in, the seam gets yanked apart.", 0.25],
+  ["rivet", "A rivet pins those corners together with metal, so the fabric can't tear.", 0.3],
+  ["history", "This goes back to [1873|eighteen seventy-three].", 0.2, {"pitch": 0.5}],
+  ["davis", "Workers kept ripping their pants. So a tailor named Jacob Davis hammered copper rivets into the corners.", 0.25],
+  ["broke", "But he was too broke to pay for the patent. So he teamed up with the guy who sold him the fabric. Levi Strauss.", 0.25],
+  ["patent", "On May twentieth, [1873|eighteen seventy-three], they got the patent. And blue jeans were born.", 0.3, {"pitch": 1, "k": 1.5}],
+  ["roast2", "So the most famous pants in history exist because one guy couldn't afford paperwork. Relatable.", 0.35, {"k": 1.5}],
+  ["roast3", "And you thought those dots were bling? Buddy, they're older than your great-great-grandma.", 0.35, {"pitch": 1, "k": 1.6}],
+  ["last", "Next time you put your hands in your pockets, thank a broke tailor.", 0.35, {"pitch": 0.5}],
+  ["outro", "So... what should I delete next?", 1.2, {"pitch": 1, "k": 1.5}]
+ ]
+}
