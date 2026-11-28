@@ -13,6 +13,7 @@
 | #9 | What if keyboards had no bumps? (F/J, **erste 3D-Folge**) | `ep09_keyboard/WhatIf_09_Keyboard_Bumps.mp4` (65 s) |
 | #10 DE | Was wäre ohne die Huckel? (deutsche Fassung, 2D-Quix in 3D) | `ep10_tastatur_de/WasWaere_10_Tastatur_Huckel_DE.mp4` (76 s) |
 | Geschichte DE | Keine Sklaven?! Wie die Pyramiden gebaut wurden (Quix als Pharao/Historiker) | `ep11_pyramiden/Quix_Pyramiden_DE.mp4` (88 s) |
+| Geschichte DE | Wäsche mit Urin?! Die Römer (Quix als Römer/Kaiser/Historiker) | `ep12_roemer/Quix_Roemer_DE.mp4` (89 s) |
 
 Weitere recherchierte Themen mit Quellen: **`THEMEN.md`**.
 
@@ -21,7 +22,9 @@ Tempo 1,18, mindestens 60 Sekunden. Quix hat eigene Sprüche, die witzig sind un
 **Pointen ab #9:** eigene Zeile mit `pre` (Pause davor), langsamer, höher, `k` 1,9 und `gain` +3 dB, danach Rimshot oder Plattenkratzer.
 **Deutsch ab #10:** `engine/voice_edge.py` (Edge TTS, Wort-Zeitstempel aus WordBoundary, pro Zeile `rate`/`pitch`/`volume`, `pre`, `gain`).
 Stimme: `fr-FR-RemyMultilingualNeural` (spricht Deutsch, klingt natürlicher als `de-DE-ChristophNeural`). Braucht den Host `speech.platform.bing.com`.
-**Kostüme (2D-Quix):** `outfit: 'pharaoh'` (Nemes, Bart, Kragen) oder `'historian'` (Tropenhelm, Brille), `item: 'jug' | 'pointer'`.
+`"lang": "de-DE"` ersetzt das von edge_tts fest gesetzte `en-US`. Für deutsche Aussprache: keine englischen Wörter, Zahlen immer in ganzen deutschen Sätzen.
+Pointen ab Römer-Folge: tiefer statt höher (`pitch` −4 Hz, `rate` −4 %, `volume` +20 %, `pre` 0,4 s).
+**Kostüme (2D-Quix):** `outfit: 'pharaoh'` (Nemes, Bart, Kragen), `'historian'` (Tropenhelm, Brille), `'roman'`/`'emperor'` (Toga, Lorbeer), `item: 'jug' | 'pointer' | 'coin' | 'pot'`.
 **3D ab #9:** `engine/web/q3d.js` (three.js r150, Toon-Look mit Konturen, 3D-Quix). Untertitel und Labels bleiben 2D darüber.
 
 Alle Folgen: 1080×1920, 30 fps, Englisch mit Karaoke-Untertiteln, −14 LUFS, **ohne Hintergrundmusik**
@@ -99,5 +102,9 @@ Die Arbeit war aber teils verpflichtend und lief in wechselnden Schichten ([CBC]
 Team-Graffiti „Freunde des Cheops“, „Trunkenbolde des Mykerinos“ (Lehner). Nasser Sand halbiert die Zugkraft (Uni Amsterdam 2014, Hypothese mit Laborbeleg,
 [Live Science](https://www.livescience.com/45285-how-egyptians-moved-pyramid-stones.html)). ca. 2,3 Mio. Blöcke, ca. 6 Mio. t, weiße Tura-Kalksteinverkleidung,
 über 3.800 Jahre höchstes Bauwerk ([Wikipedia](https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza)). Bauzeit je nach Quelle ca. 20–27 Jahre.
+**Römer** Walker (fullones) wuschen mit abgestandenem Urin, Ammoniak als Reiniger; Vespasian besteuerte Urin, Titus beschwerte sich, Münze unter der Nase (Sueton)
+([Wikipedia: Pecunia non olet](https://en.wikipedia.org/wiki/Pecunia_non_olet)). Gladiatoren aus Ephesos aßen überwiegend Pflanzliches, erhöhtes Strontium passt zu Pflanzenasche-Trank (PLOS ONE 2014,
+[PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4198250)). Selbstheilender römischer Beton durch Kalkklasten (MIT 2023, [MIT News](https://news.mit.edu/2023/roman-concrete-durability-lime-casts-0106)),
+Pantheon-Kuppel 128 n. Chr. Thermopolium in Pompeji 2020 mit Resten von Ente, Ziege, Schwein, Fisch, Schnecken ([NPR](https://www.npr.org/2020/12/27/950645473/whats-on-the-menu-in-ancient-pompeii-duck-goat-snail-researchers-say)).
 
 Schriften: Bungee & Lilita One (SIL Open Font License). 3D: three.js (MIT, `engine/web/vendor/THREE_LICENSE`). Musik und Soundeffekte sind komplett synthetisiert.

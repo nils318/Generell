@@ -1,0 +1,156 @@
+{
+ "tts": "edge",
+ "voice": "fr-FR-RemyMultilingualNeural",
+ "lang": "de-DE",
+ "rate": "+10%",
+ "music": false,
+ "lines": [
+  [
+   "hook",
+   "Die alten Römer haben ihre Kleidung mit Urin gewaschen.",
+   0.2,
+   {
+    "pitch": "+2Hz",
+    "volume": "+25%",
+    "gain": 2
+   }
+  ],
+  [
+   "hook2",
+   "Und der Kaiser hat darauf sogar Steuern kassiert.",
+   0.4
+  ],
+  [
+   "intro",
+   "Ich bin Quix. Heute bin ich Historiker. Und ein kleines bisschen Römer.",
+   0.3,
+   {
+    "pitch": "+4Hz"
+   }
+  ],
+  [
+   "wash",
+   "In den Wäschereien stampften Arbeiter die Kleidung in Bottichen voller Urin. Das Ammoniak darin löst Fett und Schmutz.",
+   0.2
+  ],
+  [
+   "collect",
+   "Den Urin sammelte man in Töpfen am Straßenrand. Jeder durfte etwas spenden.",
+   0.2,
+   {
+    "pitch": "+2Hz"
+   }
+  ],
+  [
+   "roast1",
+   "Und du ekelst dich schon, wenn jemand aus deiner Flasche trinkt.",
+   0.6,
+   {
+    "pre": 0.4,
+    "pitch": "-4Hz",
+    "rate": "-4%",
+    "volume": "+20%",
+    "gain": 2
+   }
+  ],
+  [
+   "tax",
+   "Kaiser Vespasian ließ dafür eine Steuer zahlen. Sein Sohn Titus fand das widerlich.",
+   0.2
+  ],
+  [
+   "coin",
+   "Da hielt ihm der Kaiser eine Goldmünze unter die Nase und fragte, ob sie stinkt.",
+   0.2,
+   {
+    "pitch": "+2Hz"
+   }
+  ],
+  [
+   "geld",
+   "Daher kommt der Spruch: Geld stinkt nicht.",
+   0.4,
+   {
+    "pre": 0.2,
+    "rate": "-6%",
+    "volume": "+15%"
+   }
+  ],
+  [
+   "glad",
+   "Und die Gladiatoren? Keine Fleischberge. Man nannte sie Gerstenfresser, denn sie aßen vor allem Bohnen und Getreide.",
+   0.2,
+   {
+    "pitch": "+2Hz"
+   }
+  ],
+  [
+   "ash",
+   "Knochenfunde aus Ephesos zeigen: Nach dem Training tranken sie wahrscheinlich sogar Pflanzenasche, für stärkere Knochen.",
+   0.2
+  ],
+  [
+   "roast2",
+   "Der erste Sportlerdrink der Geschichte war also Asche mit Wasser. Prost.",
+   0.6,
+   {
+    "pre": 0.4,
+    "pitch": "-4Hz",
+    "rate": "-6%",
+    "volume": "+20%",
+    "gain": 2
+   }
+  ],
+  [
+   "concrete",
+   "Und römischer Beton repariert sich selbst. Kleine Kalkbrocken füllen Risse wieder auf, sobald Wasser eindringt.",
+   0.2,
+   {
+    "pitch": "+2Hz"
+   }
+  ],
+  [
+   "pantheon",
+   "Deshalb steht die Kuppel des Pantheons in Rom schon seit fast neunzehnhundert Jahren.",
+   0.2
+  ],
+  [
+   "roast3",
+   "Und die Straße vor deiner Schule hat schon nach einem einzigen Winter Schlaglöcher.",
+   0.6,
+   {
+    "pre": 0.4,
+    "pitch": "-4Hz",
+    "rate": "-4%",
+    "volume": "+20%",
+    "gain": 2
+   }
+  ],
+  [
+   "food",
+   "Und Imbissbuden gab es auch. In Pompeji fand man eine Theke mit Resten von Ente und Schnecken in den Töpfen.",
+   0.2
+  ],
+  [
+   "roast4",
+   "Schnecken zum Mitnehmen. Und du bestellst immer nur Pommes.",
+   0.6,
+   {
+    "pre": 0.4,
+    "pitch": "-4Hz",
+    "rate": "-4%",
+    "volume": "+20%",
+    "gain": 2
+   }
+  ],
+  [
+   "outro",
+   "Also... welches Volk soll ich mir als Nächstes vornehmen?",
+   1.2,
+   {
+    "pitch": "+4Hz",
+    "volume": "+15%"
+   }
+  ]
+ ]
+}

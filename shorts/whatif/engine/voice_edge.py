@@ -2,7 +2,7 @@
 
     python voice_edge.py <episode_dir>
 
-script.json: {"tts": "edge", "voice": "de-DE-ChristophNeural", "rate": "+10%",
+script.json: {"tts": "edge", "voice": "de-DE-ChristophNeural", "rate": "+10%", "lang": "de-DE",
               "lines": [[cue, text, pause, {rate, pitch, volume, pre, gain}?], ...]}
   rate "+10%", pitch "+12Hz", volume "+20%" are Edge prosody values per line (livelier delivery),
   pre = seconds of silence before the line, gain = dB boost for punchlines.
@@ -20,6 +20,11 @@ CA = "/root/.ccr/ca-bundle.crt"
 
 import certifi, edge_tts
 if os.path.exists(CA): certifi.where = lambda: CA   # this environment's TLS-inspecting proxy
+import edge_tts.communicate as _C
+LANG = S.get("lang")   # e.g. "de-DE": edge_tts always sends xml:lang='en-US', which nudges multilingual voices towards English
+if LANG:
+    _mk = _C.mkssml
+    _C.mkssml = lambda tc, text: _mk(tc, text).replace("xml:lang='en-US'", f"xml:lang='{LANG}'", 1)
 
 
 def parse(text):  # -> spoken text, [(display word, n spoken words)]

@@ -445,6 +445,36 @@ function glasses(ctx) {
   for (const sd of [-1, 1]) { ctx.beginPath(); ctx.arc(58 * sd, -305, 36, 3.6, 4.4); ctx.stroke(); }
   ctx.restore();
 }
+
+function romanBack(ctx) {   // toga drape behind the left shoulder
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8; ctx.fillStyle = '#F4EFE2';
+  ctx.beginPath(); ctx.moveTo(-150, -250); ctx.quadraticCurveTo(-200, -150, -170, -40); ctx.lineTo(-120, -50); ctx.lineTo(-110, -230); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+function toga(ctx, emperor) {
+  ctx.save(); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
+  const p = new Path2D();
+  p.moveTo(-135, -215); p.quadraticCurveTo(-60, -200, 20, -150); p.quadraticCurveTo(90, -100, 128, -40);
+  p.lineTo(110, -6); p.quadraticCurveTo(0, 20, -112, -6); p.quadraticCurveTo(-140, -110, -135, -215); p.closePath();
+  ctx.fillStyle = '#F4EFE2'; ctx.fill(p);
+  ctx.save(); ctx.clip(p); ctx.strokeStyle = 'rgba(120,100,70,0.35)'; ctx.lineWidth = 6;
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-120 + i * 18, -190 + i * 10); ctx.quadraticCurveTo(-20 + i * 30, -120 + i * 8, 60 + i * 14, -20); ctx.stroke(); }
+  ctx.restore(); ctx.stroke(p);
+  const band = new Path2D(); band.moveTo(-135, -215); band.quadraticCurveTo(-60, -200, 20, -150); band.quadraticCurveTo(90, -100, 128, -40);
+  ctx.strokeStyle = emperor ? '#7A1FA2' : '#C0392B'; ctx.lineWidth = 18; ctx.stroke(band);
+  ctx.strokeStyle = Q.ink; ctx.lineWidth = 3; ctx.stroke(band);
+  ctx.restore();
+}
+function laurel(ctx) {
+  ctx.save(); ctx.strokeStyle = Q.ink; ctx.lineWidth = 5;
+  for (const sd of [-1, 1]) for (let i = 0; i < 7; i++) {
+    const a = -Math.PI / 2 + sd * (0.35 + i * 0.2), x = Math.cos(a) * 150 * 0.95, y = -330 + Math.sin(a) * 95;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(a + sd * 0.9); ctx.fillStyle = i % 2 ? '#3FA34D' : '#5CC163';
+    ctx.beginPath(); ctx.ellipse(0, 0, 30, 13, 0, 0, 7); ctx.fill(); ctx.stroke(); ctx.restore();
+  }
+  ctx.restore();
+}
+
 function heldItem(ctx, kind, x, y, t) {
   ctx.save(); ctx.translate(x, y); ctx.lineJoin = 'round'; ctx.strokeStyle = Q.ink; ctx.lineWidth = 8;
   if (kind === 'jug') {     // clay beer jug
@@ -453,6 +483,18 @@ function heldItem(ctx, kind, x, y, t) {
     ctx.fillStyle = '#FFF4D6'; ctx.beginPath(); ctx.ellipse(0, -72, 40, 16, 0, 0, 7); ctx.fill(); ctx.stroke();
     for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(-20 + i * 20, -84 - 6 * Math.sin(t * 6 + i), 12, 0, 7); ctx.fill(); ctx.stroke(); }
     ctx.strokeStyle = '#8A4A20'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-44, 0); ctx.lineTo(44, 0); ctx.stroke();
+  } else if (kind === 'coin') {
+    ctx.translate(0, -60); const g = ctx.createRadialGradient(-12, -12, 4, 0, 0, 48); g.addColorStop(0, '#FFF2B0'); g.addColorStop(1, '#D9A21B');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 46, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = '#A8780E'; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(0, 0, 34, 0, 7); ctx.stroke();
+    ctx.fillStyle = '#A8780E'; ctx.beginPath(); ctx.ellipse(4, -2, 14, 18, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.8)'; ctx.beginPath(); ctx.arc(-18, -20, 6 + 3 * Math.sin(t * 8), 0, 7); ctx.fill();
+  } else if (kind === 'pot') {
+    ctx.translate(0, -40);
+    ctx.fillStyle = '#B5652E'; ctx.beginPath(); ctx.moveTo(-30, -62); ctx.lineTo(30, -62); ctx.quadraticCurveTo(66, -20, 46, 40); ctx.quadraticCurveTo(0, 64, -46, 40); ctx.quadraticCurveTo(-66, -20, -30, -62); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#F2D24A'; ctx.beginPath(); ctx.ellipse(0, -62, 30, 11, 0, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(160,200,60,0.8)'; ctx.lineWidth = 5;
+    for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(-18 + i * 18, -80); ctx.bezierCurveTo(-30 + i * 18, -110 - 6 * Math.sin(t * 5 + i), -6 + i * 18, -130, -18 + i * 18, -160); ctx.stroke(); }
   } else if (kind === 'pointer') {
     ctx.rotate(-0.9); ctx.fillStyle = '#8A5A2B'; ctx.beginPath(); ctx.roundRect(-8, -230, 16, 240, 8); ctx.fill(); ctx.stroke();
     ctx.fillStyle = '#FFD43B'; ctx.beginPath(); ctx.arc(0, -232, 14, 0, 7); ctx.fill(); ctx.stroke();
@@ -489,6 +531,7 @@ function drawQuix(ctx, o) {
   ctx.translate(0, 60);
   if (o.wig) drawWig(ctx, true);
   if (o.outfit === 'pharaoh') nemesBack(ctx);
+  if (o.outfit === 'roman' || o.outfit === 'emperor') romanBack(ctx);
   scarfTails(ctx, t, o.wind);
   const tip = drawAntenna(ctx, o);
   // body fill
@@ -514,7 +557,9 @@ function drawQuix(ctx, o) {
   if (o.wig) drawWig(ctx, false);
   if (o.hat === 'fedora') drawFedora(ctx);
   if (o.outfit === 'historian') pithHelmet(ctx);
-  if (o.outfit === 'pharaoh') { nemesFront(ctx); pharaohCollar(ctx); } else drawScarf(ctx, t);
+  if (o.outfit === 'pharaoh') { nemesFront(ctx); pharaohCollar(ctx); }
+  else if (o.outfit === 'roman' || o.outfit === 'emperor') { toga(ctx, o.outfit === 'emperor'); laurel(ctx); }
+  else drawScarf(ctx, t);
   drawEye(ctx, -58, -305, -1, o, E);
   drawEye(ctx, 58, -305, 1, o, E);
   drawMouth(ctx, o, E);
